@@ -459,7 +459,7 @@ var Body = /** @class */ (function (_super) {
     };
     Body.prototype.AddUserOption = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var saveComputerComponent, ProcessorSku, MainboarSku, UserId, message;
+            var saveComputerComponent, ProcessorSku, MainboarSku, UserId, message, IsExist;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -469,9 +469,24 @@ var Body = /** @class */ (function (_super) {
                         MainboarSku = saveComputerComponent[1].product.sku ? saveComputerComponent[1].product.sku : "0";
                         UserId = 1;
                         message = 0;
+                        IsExist = 0;
                         return [4 /*yield*/, axios_1.default({
-                                method: 'post',
-                                url: 'api/ComputerComponent/AddUserOption',
+                                method: 'get',
+                                url: 'api/UserCart/CheckUserChooseOrNot',
+                                params: {
+                                    UserId: 1,
+                                }
+                            })
+                                .then(function (response) {
+                                console.log(response.data);
+                                IsExist = response.data;
+                            })];
+                    case 1:
+                        _a.sent();
+                        if (!(IsExist == UserId)) return [3 /*break*/, 3];
+                        return [4 /*yield*/, axios_1.default({
+                                method: 'put',
+                                url: 'api/ComputerComponent/UpdateUserOption',
                                 params: {
                                     ProcessorSku: ProcessorSku,
                                     MainboarSku: MainboarSku,
@@ -482,9 +497,26 @@ var Body = /** @class */ (function (_super) {
                                 console.log(response);
                                 message = response.data;
                             })];
-                    case 1:
+                    case 2:
                         _a.sent();
-                        return [2 /*return*/];
+                        return [3 /*break*/, 5];
+                    case 3: return [4 /*yield*/, axios_1.default({
+                            method: 'post',
+                            url: 'api/ComputerComponent/AddUserOption',
+                            params: {
+                                ProcessorSku: ProcessorSku,
+                                MainboarSku: MainboarSku,
+                                UserId: UserId
+                            }
+                        })
+                            .then(function (response) {
+                            console.log(response);
+                            message = response.data;
+                        })];
+                    case 4:
+                        _a.sent();
+                        _a.label = 5;
+                    case 5: return [2 /*return*/];
                 }
             });
         });
@@ -582,7 +614,7 @@ var Body = /** @class */ (function (_super) {
                                         React.createElement(react_router_dom_1.Link, { to: "/cart" },
                                             React.createElement("button", { className: "css-1pzezh5" }, "Mua ngay")),
                                         React.createElement("button", { className: "css-no0qj7" },
-                                            React.createElement("span", { className: "css-1ezgv1", onClick: function () { _this.AddUserOption(); _this.UpdateUserOption(); } }, "Th\u00EAm v\u00E0o gi\u1ECF h\u00E0ng"))))))))),
+                                            React.createElement("span", { className: "css-1ezgv1", onClick: function () { _this.AddUserOption(); } }, "Th\u00EAm v\u00E0o gi\u1ECF h\u00E0ng"))))))))),
             React.createElement(footer_1.default, null)));
     };
     return Body;

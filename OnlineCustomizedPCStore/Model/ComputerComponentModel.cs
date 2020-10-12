@@ -55,7 +55,7 @@ namespace OnlineCustomizedPCStore.Model
 
 		public List<ComputerComponentModel> GetUserOptions(int UserId)
 		{
-			string query = "select cc.Id, Name, URL, SKU, Price, Type from ComputerComponent as cc join UserCart sc on sc.ProcessorSku = cc.SKU or sc.MainboarSku = cc.SKU where sc.UserId = @UserId";
+			string query = "select cc.Id, Name, URL, SKU, Price, Type from ComputerComponent as cc join UserCart as sc on sc.ProcessorSku = cc.SKU or sc.MainboarSku = cc.SKU where sc.UserId = @UserId";
 
 			List<SqlParameter> parameters = new List<SqlParameter>
 			{

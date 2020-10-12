@@ -9,6 +9,11 @@ namespace OnlineCustomizedPCStore.Controllers
 	[ApiController]
 	public class UserCartController : ControllerBase
 	{
-
+		[HttpGet("[action]")]
+		public int CheckUserChooseOrNot(int UserId)
+		{
+			UserCartModel userCart = new UserCartModel();
+			return userCart.CheckUserChooseOrNot(UserId);
+		}
 	}
 }

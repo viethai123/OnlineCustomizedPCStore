@@ -433,42 +433,72 @@ export default class Body extends Component<any, any> {
 		var MainboarSku = saveComputerComponent[1].product.sku ? saveComputerComponent[1].product.sku : "0";
 		var UserId = 1;
 		var message = 0;
+		var IsExist = 0;
+
 		await axios({
-			method: 'post',
-			url: 'api/ComputerComponent/AddUserOption',
+			method: 'get',
+			url: 'api/UserCart/CheckUserChooseOrNot',
 			params: {
-				ProcessorSku: ProcessorSku,
-				MainboarSku: MainboarSku,
-				UserId: UserId
+				UserId: 1,
 			}
 		})
 			.then(function (response) {
-				console.log(response);
-				message = response.data;
+				console.log(response.data);
+				IsExist = response.data;
 			});
+
+		if (IsExist == UserId) {
+			await axios({
+				method: 'put',
+				url: 'api/ComputerComponent/UpdateUserOption',
+				params: {
+					ProcessorSku: ProcessorSku,
+					MainboarSku: MainboarSku,
+					UserId: UserId
+				}
+			})
+				.then(function (response) {
+					console.log(response);
+					message = response.data;
+				});
+		} else {
+			await axios({
+				method: 'post',
+				url: 'api/ComputerComponent/AddUserOption',
+				params: {
+					ProcessorSku: ProcessorSku,
+					MainboarSku: MainboarSku,
+					UserId: UserId
+				}
+			})
+				.then(function (response) {
+					console.log(response);
+					message = response.data;
+				});
+		}
 	}
 
-	async UpdateUserOption() {
-		debugger
-		var saveComputerComponent = this.state.saveComputerComponent;
-		var ProcessorSku = saveComputerComponent[0].product.sku ? saveComputerComponent[0].product.sku : "0";
-		var MainboarSku = saveComputerComponent[1].product.sku ? saveComputerComponent[1].product.sku : "0";
-		var UserId = 1;
-		var message = 0;
-		await axios({
-			method: 'put',
-			url: 'api/ComputerComponent/UpdateUserOption',
-			params: {
-				ProcessorSku: ProcessorSku,
-				MainboarSku: MainboarSku,
-				UserId: UserId
-			}
-		})
-			.then(function (response) {
-				console.log(response);
-				message = response.data;
-			});
-	}
+	//async UpdateUserOption() {
+	//	debugger
+	//	var saveComputerComponent = this.state.saveComputerComponent;
+	//	var ProcessorSku = saveComputerComponent[0].product.sku ? saveComputerComponent[0].product.sku : "0";
+	//	var MainboarSku = saveComputerComponent[1].product.sku ? saveComputerComponent[1].product.sku : "0";
+	//	var UserId = 1;
+	//	var message = 0;
+	//	await axios({
+	//		method: 'put',
+	//		url: 'api/ComputerComponent/UpdateUserOption',
+	//		params: {
+	//			ProcessorSku: ProcessorSku,
+	//			MainboarSku: MainboarSku,
+	//			UserId: UserId
+	//		}
+	//	})
+	//		.then(function (response) {
+	//			console.log(response);
+	//			message = response.data;
+	//		});
+	//}
 
 	async GetUserOption() {
 		var UserId = 1;
@@ -549,7 +579,7 @@ export default class Body extends Component<any, any> {
 													Mua ngay
 											</button></Link>
 											<button className="css-no0qj7">
-												<span className="css-1ezgv1" onClick={() => { this.AddUserOption(); this.UpdateUserOption() }}>Thêm vào giỏ hàng</span>
+												<span className="css-1ezgv1" onClick={() => { this.AddUserOption();}}>Thêm vào giỏ hàng</span>
 											</button>
 										</div>
 									</div>

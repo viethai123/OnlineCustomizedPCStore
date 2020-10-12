@@ -67,5 +67,37 @@ namespace OnlineCustomizedPCStore.Model
 			}
 			return rowsAffected;
 		}
+
+		public int CheckUserChooseOrNot(int UserId)
+		{
+			string query = "select UserId from UserCart"
+						   + " where UserId = @UserId";
+			List<SqlParameter> parameters = new List<SqlParameter>
+			{
+				new SqlParameter("@UserId", UserId),
+			};
+			int rowsAffected = 0;
+			try
+			{
+				SqlDataReader reader = SqlHelper.ExecuteReader(Startup.ConnectionString, CommandType.Text, query, parameters.ToArray());
+				if (reader.HasRows)
+				{
+					while (reader.Read())
+					{
+						rowsAffected = reader.GetInt32(0);
+					}
+				}
+				else
+				{
+					rowsAffected = -1;
+				}
+				reader.Close();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+			return rowsAffected;
+		}
 	}
 }

@@ -153,6 +153,7 @@ export default class Payment extends Component<any, any> {
 					status: false,
 				},
 			],
+			optionComputerComponent: []
 		};
 	}
 
@@ -197,48 +198,52 @@ export default class Payment extends Component<any, any> {
 				<div className="container">
 					<div className="css-1c5m4ef">
 						<div className="css-l6dpr4">
-							<div className="css-j0x69t">
-								<div className="card-body css-0">
-									<div className="css-1sbsckd">
-										<div className="css-16u6ie8">
-											<div className="css-x23u6">Vi xử lý</div>
-										</div>
-										<div className="css-16u6ie8">
-											<div className="css-g73s75">
-												<picture>
-													<source srcSet="https://lh3.googleusercontent.com/33Q9QTeCFz4j1UI_ABD-bDFVshrIPcraVPMyRIrQUfn3shVAPjimbi-ghRD2Qe04To63i_ezmmt-OK46U_c=w150-rw" type="image/webp"></source>
-													<source srcSet="RAM desktop KINGMAX (1x4GB) DDR3 1600MHz" type="image/png"></source>
-													<img className="lazyload css-jdz5ak" alt="" data-src="RAM desktop KINGMAX (1x4GB) DDR3 1600MHz" src="RAM desktop KINGMAX (1x4GB) DDR3 1600MHz" loading="lazy"></img>
-												</picture>
-											</div>
-										</div>
-										<div className="css-1680iyu">
-											<div>
-												<a href="/bo-vi-xu-ly-cpu-intel-core-i79700-12m-cache-up-to-47ghz-s190900303.html" rel="noreferrer noopener" target="_blank" className="css-587jha">
-													<div className="css-1vrkwu6">RAM desktop KINGMAX (1x4GB) DDR3 1600MHz</div>
-												</a>
-												<span className="css-k5lh0a">SKU: SKU: 1201390</span>
-											</div>
-										</div>
-										<div className="css-114vf0c">
-											<div className="css-mx5oai">
-												<button className="css-1775qfl"><span color="#1435c3" className="css-1hoeh5r">x</span></button>
-												<div className="css-1hqugw1">1</div>
-												{/*<button className="css-1775qfl"><span className="css-139qrut">+</span></button>*/}
-											</div>
-										</div>
-										<div className="css-114vf0c">
-											<div className="css-iarkvp">
-												<div className="css-nel2x3">
-													<span className="css-wgeuy1">590.000đ<span className="css-1ul6wk9">đ</span></span>
-													<div className="css-1vptl7o"><span className="css-1lypflo">9.190.000<span className="css-1ul6wk9">đ</span></span></div>
+							{this.state.optionComputerComponent.map((item: any) => {
+								return (
+									<div className="css-j0x69t">
+										<div className="card-body css-0">
+											<div className="css-1sbsckd">
+												<div className="css-16u6ie8">
+													<div className="css-x23u6">Vi xử lý</div>
 												</div>
+												<div className="css-16u6ie8">
+													<div className="css-g73s75">
+														<picture>
+															<source srcSet={item.url} type="image/webp"></source>
+															<source srcSet={item.name} type="image/png"></source>
+															<img className="lazyload css-jdz5ak" alt="" data-src={item.name} src={item.name} loading="lazy"></img>
+														</picture>
+													</div>
+												</div>
+												<div className="css-1680iyu">
+													<div>
+														<a href="/bo-vi-xu-ly-cpu-intel-core-i79700-12m-cache-up-to-47ghz-s190900303.html" rel="noreferrer noopener" target="_blank" className="css-587jha">
+															<div className="css-1vrkwu6">{item.name}</div>
+														</a>
+														<span className="css-k5lh0a">{item.sku}</span>
+													</div>
+												</div>
+												<div className="css-114vf0c">
+													<div className="css-mx5oai">
+														<button className="css-1775qfl"><span color="#1435c3" className="css-1hoeh5r">x</span></button>
+														<div className="css-1hqugw1">1</div>
+														{/*<button className="css-1775qfl"><span className="css-139qrut">+</span></button>*/}
+													</div>
+												</div>
+												<div className="css-114vf0c">
+													<div className="css-iarkvp">
+														<div className="css-nel2x3">
+															<span className="css-wgeuy1">{item.price}<span className="css-1ul6wk9">đ</span></span>
+															<div className="css-1vptl7o"><span className="css-1lypflo">9.190.000<span className="css-1ul6wk9">đ</span></span></div>
+														</div>
+													</div>
+												</div>
+												<div className="css-16u6ie8"><button id="chooseComputerComponent" className="css-7ivzg6">Xóa</button></div>
 											</div>
 										</div>
-										<div className="css-16u6ie8"><button id="chooseComputerComponent" className="css-7ivzg6">Xóa</button></div>
 									</div>
-								</div>
-							</div>
+								)
+							})}
 						</div>
 						<div className="css-8xcfft">
 							<div className="css-1odjv61">
@@ -252,7 +257,7 @@ export default class Payment extends Component<any, any> {
 												<tr>
 													<td color="#848788" className="css-8ogxmh">
 														Tạm tính
-                          </td>
+													</td>
 													<td className="css-1xrkmkn">
 														<span className="css-htm2b9">
 															79.995.000 <span className="css-1angbw">đ</span>
@@ -262,7 +267,7 @@ export default class Payment extends Component<any, any> {
 												<tr>
 													<td color="#848788" className="css-13izjcd">
 														Phí vận chuyển
-                          </td>
+													</td>
 													<td className="css-fsu5pb">
 														<span className="css-htm2b9">
 															0 <span className="css-1angbw">đ</span>
@@ -272,7 +277,7 @@ export default class Payment extends Component<any, any> {
 												<tr>
 													<td color="#848788" className="css-13izjcd">
 														Khuyến mãi
-                          </td>
+													</td>
 													<td className="css-fsu5pb">
 														<span className="css-htm2b9">
 															4.970.000 <span className="css-1angbw">đ</span>
@@ -282,7 +287,7 @@ export default class Payment extends Component<any, any> {
 												<tr>
 													<td color="#848788" className="css-13izjcd">
 														Thành tiền
-                          </td>
+													</td>
 													<td className="css-aafp0n">
 														<span className="css-htm2b9">
 															75.025.000 <span className="css-1ul6wk9">đ</span>
@@ -297,7 +302,7 @@ export default class Payment extends Component<any, any> {
 								<div className="card-footer css-0">
 									<button className="css-epgzji">
 										THANH TOÁN
-                    <span className="help">Bạn cần đăng nhập để tiếp tục</span>
+									<span className="help">Bạn cần đăng nhập để tiếp tục</span>
 									</button>
 								</div>
 							</div>
