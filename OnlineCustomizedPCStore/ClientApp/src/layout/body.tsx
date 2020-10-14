@@ -430,7 +430,8 @@ export default class Body extends Component<any, any> {
 		debugger
 		var saveComputerComponent = this.state.saveComputerComponent;
 		var ProcessorSku = saveComputerComponent[0].product.sku ? saveComputerComponent[0].product.sku : "0";
-		var MainboarSku = saveComputerComponent[1].product.sku ? saveComputerComponent[1].product.sku : "0";
+		var QuantityProcessor = saveComputerComponent[0].product.quantity ? saveComputerComponent[0].product.quantity : 0;
+		var MainboarSku = saveComputerComponent[1].product ? saveComputerComponent[1].product.sku : "0";
 		var UserId = 1;
 		var message = 0;
 		var IsExist = 0;
@@ -447,7 +448,7 @@ export default class Body extends Component<any, any> {
 				IsExist = response.data;
 			});
 
-		if (IsExist == UserId) {
+		if (/*IsExist == UserId*/true) {
 			await axios({
 				method: 'put',
 				url: 'api/ComputerComponent/UpdateUserOption',
@@ -461,6 +462,52 @@ export default class Body extends Component<any, any> {
 					console.log(response);
 					message = response.data;
 				});
+			saveComputerComponent.forEach(async (computerComponent: any) => {
+				var IsExistProduct = 0;
+				if (/*computerComponent.product ? true : false*/true) {
+					await axios({
+						method: 'get',
+						url: 'api/UserCart/CheckProductIsExist',
+						params: {
+							UserId: 1,
+							SKU: computerComponent.product.sku
+						}
+					})
+						.then(function (response) {
+							console.log(response.data);
+							IsExistProduct = response.data;
+						});
+					if (/*IsExistProduct != 0*/true) {
+						await axios({
+							method: 'put',
+							url: 'api/Quantity/UpdateUserOptionQuantity',
+							params: {
+								SKU: computerComponent.product.sku,
+								Quantity: computerComponent.product.quantity,
+								UserId: UserId,
+							}
+						})
+							.then(function (response) {
+								console.log(response);
+								message = response.data;
+							});
+					} else {
+						await axios({
+							method: 'post',
+							url: 'api/Quantity/AddUserOptionQuantity',
+							params: {
+								SKU: computerComponent.product.sku,
+								Quantity: computerComponent.product.quantity,
+								UserId: UserId,
+							}
+						})
+							.then(function (response) {
+								console.log(response);
+								message = response.data;
+							});
+					}
+				}
+			});
 		} else {
 			await axios({
 				method: 'post',
@@ -469,6 +516,19 @@ export default class Body extends Component<any, any> {
 					ProcessorSku: ProcessorSku,
 					MainboarSku: MainboarSku,
 					UserId: UserId
+				}
+			})
+				.then(function (response) {
+					console.log(response);
+					message = response.data;
+				});
+			await axios({
+				method: 'post',
+				url: 'api/Quantity/AddUserOptionQuantity',
+				params: {
+					SKU: ProcessorSku,
+					UserId: UserId,
+					Quantity: QuantityProcessor
 				}
 			})
 				.then(function (response) {
@@ -553,7 +613,6 @@ export default class Body extends Component<any, any> {
 													this.DeleteProduct(item, key)
 												}
 												AddUserOption={() => this.AddUserOption()}
-												UpdateUserOption={() => this.UpdateUserOption()}
 											/>
 										);
 									}
@@ -579,7 +638,7 @@ export default class Body extends Component<any, any> {
 													Mua ngay
 											</button></Link>
 											<button className="css-no0qj7">
-												<span className="css-1ezgv1" onClick={() => { this.AddUserOption();}}>Thêm vào giỏ hàng</span>
+												<span className="css-1ezgv1" onClick={() => { this.AddUserOption(); }}>Thêm vào giỏ hàng</span>
 											</button>
 										</div>
 									</div>

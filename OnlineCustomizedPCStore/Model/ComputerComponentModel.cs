@@ -15,6 +15,7 @@ namespace OnlineCustomizedPCStore.Model
 		public string SKU { get; set; }
 		public string Price { get; set; }
 		public int Type { get; set; }
+		public int Quantity { get; set; }
 
 		public List<ComputerComponentModel> GetComputerComponents()
 		{
@@ -55,7 +56,7 @@ namespace OnlineCustomizedPCStore.Model
 
 		public List<ComputerComponentModel> GetUserOptions(int UserId)
 		{
-			string query = "select cc.Id, Name, URL, SKU, Price, Type from ComputerComponent as cc join UserCart as sc on sc.ProcessorSku = cc.SKU or sc.MainboarSku = cc.SKU where sc.UserId = @UserId";
+			string query = "select cc.Id, Name, URL, cc.SKU, Price, Type, q.Quantity from ComputerComponent as cc join UserCart sc on sc.ProcessorSku = cc.SKU or sc.MainboarSku = cc.SKU join Quantity as q on q.SKU = cc.SKU where sc.UserId = @UserId";
 
 			List<SqlParameter> parameters = new List<SqlParameter>
 			{
@@ -78,7 +79,8 @@ namespace OnlineCustomizedPCStore.Model
 							URL = reader.GetString(2),
 							SKU = reader.GetString(3),
 							Price = reader.GetString(4),
-							Type = reader.GetInt32(5)
+							Type = reader.GetInt32(5),
+							Quantity = reader.GetInt32(6)
 						};
 						computerComponents.Add(computerComponent);
 					}

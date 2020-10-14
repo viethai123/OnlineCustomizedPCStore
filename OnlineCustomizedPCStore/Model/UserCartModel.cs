@@ -99,5 +99,40 @@ namespace OnlineCustomizedPCStore.Model
 			}
 			return rowsAffected;
 		}
+
+		public int CheckProductIsExist(int UserId, string SKU)
+		{
+			string query = @"select Type from
+							(
+							select SKU from Quantity where SKU = @SKU and UserId = @UserId
+							) as a join ComputerComponent as cc on cc.SKU = a.SKU and cc.SKU = @SKU";
+			List<SqlParameter> parameters = new List<SqlParameter>
+			{
+				new SqlParameter("@ProcessorSku", SKU),
+				new SqlParameter("@UserId", UserId)
+			};
+			int rowsAffected = 0;
+			try
+			{
+				SqlDataReader reader = SqlHelper.ExecuteReader(Startup.ConnectionString, CommandType.Text, query, parameters.ToArray());
+				if (reader.HasRows)
+				{
+					while (reader.Read())
+					{
+						rowsAffected = reader.GetInt32(0);
+					}
+				}
+				else
+				{
+					rowsAffected = -1;
+				}
+				reader.Close();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+			return rowsAffected;
+		}
 	}
 }

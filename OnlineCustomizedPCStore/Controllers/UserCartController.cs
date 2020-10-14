@@ -15,5 +15,12 @@ namespace OnlineCustomizedPCStore.Controllers
 			UserCartModel userCart = new UserCartModel();
 			return userCart.CheckUserChooseOrNot(UserId);
 		}
+
+		[HttpGet("[action]")]
+		public int CheckProductIsExist(int UserId, string SKU)
+		{
+			UserCartModel userCart = new UserCartModel();
+			return userCart.CheckProductIsExist(UserId, SKU);
+		}
 	}
 }

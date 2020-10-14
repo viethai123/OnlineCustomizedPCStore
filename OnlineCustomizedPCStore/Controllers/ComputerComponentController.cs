@@ -39,7 +39,7 @@ namespace OnlineCustomizedPCStore.Controllers
 		public IEnumerable<ComputerComponentModel> GetUserOptions(int UserId)
 		{
 			ComputerComponentModel computerComponent = new ComputerComponentModel();
-			List<ComputerComponentModel> computerComponents = computerComponent.GetUserOptions(1).ToList();
+			List<ComputerComponentModel> computerComponents = computerComponent.GetUserOptions(UserId).ToList();
 			foreach (var item in computerComponents)
 			{
 				yield return item;
