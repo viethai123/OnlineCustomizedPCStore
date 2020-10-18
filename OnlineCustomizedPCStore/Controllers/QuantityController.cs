@@ -27,5 +27,13 @@ namespace OnlineCustomizedPCStore.Controllers
 			int rowAffected = quantity.UpdateUserOptionQuantity(SKU, Quantity, UserId);
 			return rowAffected;
 		}
+
+		[HttpDelete("[action]")]
+		public int DeleteProductQuantity(int UserId)
+		{
+			QuantityModel quantity = new QuantityModel();
+			int rowAffected = quantity.DeleteProductQuantity(UserId);
+			return rowAffected;
+		}
 	}
 }

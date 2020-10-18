@@ -16,6 +16,7 @@ namespace OnlineCustomizedPCStore.Model
 		public string Price { get; set; }
 		public int Type { get; set; }
 		public int Quantity { get; set; }
+		public int UserId { get; set; }
 
 		public List<ComputerComponentModel> GetComputerComponents()
 		{
@@ -36,7 +37,7 @@ namespace OnlineCustomizedPCStore.Model
 							URL = reader.GetString(2),
 							SKU = reader.GetString(3),
 							Price = reader.GetString(4),
-							Type = reader.GetInt32(5)
+							Type = reader.GetInt32(5),
 						};
 						computerComponents.Add(computerComponent);
 					}
@@ -56,7 +57,11 @@ namespace OnlineCustomizedPCStore.Model
 
 		public List<ComputerComponentModel> GetUserOptions(int UserId)
 		{
-			string query = "select cc.Id, Name, URL, cc.SKU, Price, Type, q.Quantity from ComputerComponent as cc join UserCart sc on sc.ProcessorSku = cc.SKU or sc.MainboarSku = cc.SKU join Quantity as q on q.SKU = cc.SKU where sc.UserId = @UserId";
+			string query = @"select cc.Id, Name, URL, cc.SKU, Price, Type, q.Quantity, q.UserId 
+							from ComputerComponent as cc 
+							join UserCart uc on uc.ProcessorSku = cc.SKU or uc.MainboarSku = cc.SKU 
+							join Quantity as q on q.SKU = cc.SKU 
+							where q.UserId = @UserId and uc.UserId = @UserId";
 
 			List<SqlParameter> parameters = new List<SqlParameter>
 			{
@@ -80,7 +85,8 @@ namespace OnlineCustomizedPCStore.Model
 							SKU = reader.GetString(3),
 							Price = reader.GetString(4),
 							Type = reader.GetInt32(5),
-							Quantity = reader.GetInt32(6)
+							Quantity = reader.GetInt32(6),
+							UserId = reader.GetInt32(7)
 						};
 						computerComponents.Add(computerComponent);
 					}

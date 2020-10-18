@@ -38,6 +38,10 @@ export default class ComputerComponent extends Component<any, any> {
 		);
 		const item = this.props.item;
 		const saveComputerComponent = this.props.saveComputerComponent[item.id - 1];
+		console.log("CC");
+		console.log(saveComputerComponent);
+		console.log("item");
+		console.log(item);
 		return (
 			<div className="css-j0x69t">
 				<div className="card-body css-0">

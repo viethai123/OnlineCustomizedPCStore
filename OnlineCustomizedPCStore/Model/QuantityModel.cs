@@ -68,5 +68,29 @@ namespace OnlineCustomizedPCStore.Model
 			}
 			return rowsAffected;
 		}
+
+		public int DeleteProductQuantity(int UserId)
+		{
+			string query = "DELETE FROM Quantity WHERE UserId = @UserId";
+			List<SqlParameter> parameters = new List<SqlParameter>
+			{
+				new SqlParameter("@UserId", UserId),
+			};
+			int rowsAffected = 0;
+			try
+			{
+				rowsAffected = SqlHelper.ExecuteNonQuery(Startup.ConnectionString,
+				   CommandType.Text, query, parameters.ToArray());
+				if (rowsAffected == -1)
+				{
+					Console.WriteLine("Error occurs!");
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+			return rowsAffected;
+		}
 	}
 }

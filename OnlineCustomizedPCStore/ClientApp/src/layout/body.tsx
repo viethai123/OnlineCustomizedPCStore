@@ -263,16 +263,61 @@ export default class Body extends Component<any, any> {
 				},
 			],
 			totalPrice: 0,
+
 		};
 	}
 
 	async componentDidMount() {
+		var UserId = 1;
+		await fetch('api/ComputerComponent/GetUserOptions?UserId=' + UserId)
+			.then(response => response.json())
+			.then(data => {
+				var saveComputerComponent = this.state.saveComputerComponent;
+				var totalPrice = this.state.totalPrice;
+				data.forEach((i: any) => {
+					this.state.saveComputerComponent.forEach((j: any) => {
+						if (i.type == j.id) {
+							j.product = i;
+							j.status = true;
+							console.log("lần 1");
+							console.log(j.status);
+						}
+					})
+				})
+
+				this.state.saveComputerComponent.forEach((j: any) => {
+					this.state.computerComponentDatas.forEach((k) => {
+						if (j.id == k.id) {
+							k.status = j.status;
+						}
+					})
+				})
+
+				this.state.saveComputerComponent.forEach((j: any) => {
+					if (j.product != null) {
+						var price = j.product.price ? j.product.price : "0";
+						var pricee = price.replace(".", "");
+						var priceee = pricee.replace(".", "");
+						var priceeee = priceee.replace("đ", "");
+
+						totalPrice +=
+							Object.keys(j.product).length === 0
+								? 0
+								: Number(priceeee) * j.product.quantity;
+					}
+				})
+				this.setState({
+					saveComputerComponent,
+					totalPrice
+				});
+				console.log("GetUserOptions")
+				console.log(saveComputerComponent);
+			})
 		await fetch('api/ComputerComponent/ListOfComputerComponent')
 			.then(response => response.json())
 			.then(data => {
 				this.setState({
 					computerComponentDetailData: data,
-					//region: this.state.viewProduct.regionID
 				});
 				console.log(this.state.computerComponentDetailData)
 			});
@@ -304,6 +349,7 @@ export default class Body extends Component<any, any> {
 		saveComputerComponent[key].product = product;
 		//console.log(saveComputerComponent[key]);
 		saveComputerComponent.forEach((e: any) => {
+
 			if (e.product ? true : false) {
 				var price = e.product.price ? e.product.price : "0";
 				var pricee = price.replace(".", "");
@@ -349,6 +395,7 @@ export default class Body extends Component<any, any> {
 		//console.log(this.state.saveComputerComponent);
 	};
 	DecreaseQuantity = (key: any, quantity: any) => {
+
 		let saveComputerComponent = this.state.saveComputerComponent;
 		let totalPrice = this.state.totalPrice;
 		if (saveComputerComponent[key].product.quantity > 0) {
@@ -361,7 +408,7 @@ export default class Body extends Component<any, any> {
 		totalPrice -= Number(priceeee);
 		//saveComputerComponent.forEach((e: any) => {
 		//	if (e.product ? true : false) {
-		//		debugger
+		//
 		//		var price = e.product.price;
 		//		var pricee = price.replace(".", "");
 		//		var priceee = pricee.replace(".", "");
@@ -427,14 +474,14 @@ export default class Body extends Component<any, any> {
 	};
 
 	async AddUserOption() {
-		debugger
+
 		var saveComputerComponent = this.state.saveComputerComponent;
 		var ProcessorSku = saveComputerComponent[0].product.sku ? saveComputerComponent[0].product.sku : "0";
 		var QuantityProcessor = saveComputerComponent[0].product.quantity ? saveComputerComponent[0].product.quantity : 0;
 		var MainboarSku = saveComputerComponent[1].product ? saveComputerComponent[1].product.sku : "0";
 		var UserId = 1;
 		var message = 0;
-		var IsExist = 0;
+		var IsUserChooseOrNot = 0;
 
 		await axios({
 			method: 'get',
@@ -445,10 +492,10 @@ export default class Body extends Component<any, any> {
 		})
 			.then(function (response) {
 				console.log(response.data);
-				IsExist = response.data;
+				IsUserChooseOrNot = response.data;
 			});
 
-		if (/*IsExist == UserId*/true) {
+		if (IsUserChooseOrNot != 0) { //Nếu chọn thì update, không thì add
 			await axios({
 				method: 'put',
 				url: 'api/ComputerComponent/UpdateUserOption',
@@ -462,50 +509,29 @@ export default class Body extends Component<any, any> {
 					console.log(response);
 					message = response.data;
 				});
-			saveComputerComponent.forEach(async (computerComponent: any) => {
-				var IsExistProduct = 0;
-				if (/*computerComponent.product ? true : false*/true) {
-					await axios({
-						method: 'get',
-						url: 'api/UserCart/CheckProductIsExist',
+
+			await axios({
+				method: 'delete',
+				url: 'api/Quantity/DeleteProductQuantity',
+				params: {
+					UserId: UserId
+				}
+			});
+			saveComputerComponent.forEach((computerComponent: any) => {
+				if (computerComponent.product != null) {
+					axios({
+						method: 'post',
+						url: 'api/Quantity/AddUserOptionQuantity',
 						params: {
-							UserId: 1,
-							SKU: computerComponent.product.sku
+							SKU: computerComponent.product.sku,
+							Quantity: computerComponent.product.quantity,
+							UserId: UserId,
 						}
 					})
 						.then(function (response) {
-							console.log(response.data);
-							IsExistProduct = response.data;
+							console.log(response);
+							message = response.data;
 						});
-					if (/*IsExistProduct != 0*/true) {
-						await axios({
-							method: 'put',
-							url: 'api/Quantity/UpdateUserOptionQuantity',
-							params: {
-								SKU: computerComponent.product.sku,
-								Quantity: computerComponent.product.quantity,
-								UserId: UserId,
-							}
-						})
-							.then(function (response) {
-								console.log(response);
-								message = response.data;
-							});
-					} else {
-						await axios({
-							method: 'post',
-							url: 'api/Quantity/AddUserOptionQuantity',
-							params: {
-								SKU: computerComponent.product.sku,
-								Quantity: computerComponent.product.quantity,
-								UserId: UserId,
-							}
-						})
-							.then(function (response) {
-								console.log(response);
-								message = response.data;
-							});
-					}
 				}
 			});
 		} else {
@@ -539,7 +565,7 @@ export default class Body extends Component<any, any> {
 	}
 
 	//async UpdateUserOption() {
-	//	debugger
+	//
 	//	var saveComputerComponent = this.state.saveComputerComponent;
 	//	var ProcessorSku = saveComputerComponent[0].product.sku ? saveComputerComponent[0].product.sku : "0";
 	//	var MainboarSku = saveComputerComponent[1].product.sku ? saveComputerComponent[1].product.sku : "0";
@@ -577,6 +603,7 @@ export default class Body extends Component<any, any> {
 	}
 
 	render() {
+		console.log(this.state.saveComputerComponent)
 		return (
 			<div className="main">
 				<Header />
