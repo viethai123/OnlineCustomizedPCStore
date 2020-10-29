@@ -1,11 +1,79 @@
 ﻿import * as React from "react";
 import { Component } from "react";
+import axios from 'axios';
 import "../../script";
 export default class LoginPage extends Component<any, any> {
 	constructor(props: any) {
 		super(props);
-		this.state = {};
+		this.state = {
+			id: '',
+			usersign: '',
+			passsign: '',
+			username: '',
+			password: '',
+			userEmail: '',
+			isActive: false,
+			data: [],
+		};
 	}
+
+	handleSuccessfulAuth(data) {
+		this.props.handleLogin(data);
+		this.props.history.push("/home")
+	}
+
+	//handleLogOutClick() {
+	//	this.props.handleLogOut();
+	//}
+
+	public SignUp() {
+		debugger
+		const { usersign, passsign, userEmail, data } = this.state;
+		if (data !== 0 || usersign == '' || passsign == '') {
+			alert("Please fullfill username and password.")
+		}
+		else {
+			axios({
+				method: 'post',
+				url: 'api/UserAccount/AddUserAccount',
+				params: {
+					Name: usersign,
+					Password: passsign,
+					Email: userEmail,
+				},
+				withCredentials: true
+			}).then(response => {
+				if (response.data !== 1) {
+					alert("Fail to create account")
+				}
+				else {
+					alert("Create account success.")
+					this.setState({ isActive: false, closeSignIn: true })
+				}
+			})
+		}
+	};
+
+	public async SignIn() {
+		var username = this.state.username;
+		var password = this.state.password;
+		await axios({
+			method: 'get',
+			url: 'api/UserAccount/CheckAccountLogin',
+			params: {
+				Name: username,
+				Password: password,
+			},
+		}).then(response => {
+			if (response.data[0] == null) {
+				alert("Incorrect username or password. Please try again");
+			}
+			else {
+				this.props.handleSuccessfulAuth(response.data)
+			}
+		})
+	};
+
 	render() {
 		return (
 			<div id="logreg-forms">
@@ -19,7 +87,7 @@ export default class LoginPage extends Component<any, any> {
 					<input type="email" id="inputEmail" className="form-control" placeholder="Email address"></input>
 					<input type="password" id="inputPassword" className="form-control" placeholder="Password"></input>
 
-					<button className="btn btn-success btn-block" type="submit"><i className="fas fa-sign-in-alt"></i> Sign in</button>
+					<button className="btn btn-success btn-block" type="submit" onClick={() => this.SignIn()}><i className="fas fa-sign-in-alt"></i> Sign in</button>
 					<a href="#" id="forgot_pswd">Forgot password?</a>
 					<hr></hr>
 					{/*<!-- <p>Don't have an account!</p>  -->*/}
@@ -47,7 +115,7 @@ export default class LoginPage extends Component<any, any> {
 					<input type="password" id="user-pass" className="form-control" placeholder="Password" required></input>
 					<input type="password" id="user-repeatpass" className="form-control" placeholder="Repeat Password" required></input>
 
-					<button className="btn btn-primary btn-block" type="submit"><i className="fas fa-user-plus"></i> Sign Up</button>
+					<button className="btn btn-primary btn-block" type="submit" onClick={() => this.SignUp()}><i className="fas fa-user-plus"></i> Sign Up</button>
 					<a href="#" id="cancel_signup"><i className="fas fa-angle-left"></i> Back</a>
 				</form>
 				<br></br>

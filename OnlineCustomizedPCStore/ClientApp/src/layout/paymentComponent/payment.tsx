@@ -153,25 +153,158 @@ export default class Payment extends Component<any, any> {
 					status: false,
 				},
 			],
-			optionComputerComponent: []
+			saveComputerComponent: [
+				{
+					id: 1,
+					name: "Vi xử lý",
+					icon:
+						"http://static.360buyimg.com/master-of-loader/pc/img/cpu-icon.284123fe.svg",
+					status: false,
+				},
+				{
+					id: 2,
+					name: "Bo mạch chủ",
+					icon:
+						"http://static.360buyimg.com/master-of-loader/pc/img/mother-board-icon.82595f5e.svg",
+					status: false,
+				},
+				{
+					id: 3,
+					name: "RAM",
+					icon:
+						"http://static.360buyimg.com/master-of-loader/pc/img/RAM-icon.60ea9105.svg",
+					status: false,
+				},
+				{
+					id: 4,
+					name: "Ổ HDD",
+					icon:
+						"http://static.360buyimg.com/master-of-loader/pc/img/hard-disk-icon.f639705d.svg",
+					status: false,
+				},
+				{
+					id: 5,
+					name: "Ổ SSD",
+					icon:
+						"http://static.360buyimg.com/master-of-loader/pc/img/ssd-disk-icon.79836a15.svg",
+					status: false,
+				},
+				{
+					id: 6,
+					name: "VGA",
+					icon:
+						"http://static.360buyimg.com/master-of-loader/pc/img/grphics-card-icon.7b2bb00c.svg",
+					status: false,
+				},
+				{
+					id: 7,
+					name: "Nguồn",
+					icon:
+						"http://static.360buyimg.com/master-of-loader/pc/img/power-icon.43200d33.svg",
+					status: false,
+				},
+				{
+					id: 8,
+					name: "Vỏ case",
+					icon:
+						"http://static.360buyimg.com/master-of-loader/pc/img/chassis-icon.76efc8db.svg",
+					status: false,
+				},
+				{
+					id: 9,
+					name: "Tản nhiệt",
+					icon:
+						"http://static.360buyimg.com/master-of-loader/pc/img/heat-sink-icon.7de4f64e.svg",
+					status: false,
+				},
+				{
+					id: 10,
+					name: "Màn hình",
+					icon:
+						"http://static.360buyimg.com/master-of-loader/pc/img/monitor-icon.ba848ad5.svg",
+					status: false,
+				},
+				{
+					id: 11,
+					name: "Bàn phím",
+					icon:
+						"http://static.360buyimg.com/master-of-loader/pc/img/keyboard-icon.87b45d1c.svg",
+					status: false,
+				},
+				{
+					id: 12,
+					name: "Chuột",
+					icon:
+						"http://static.360buyimg.com/master-of-loader/pc/img/mouse-icon.144f4d99.svg",
+					status: false,
+				},
+			],
+			optionComputerComponent: [],
+			totalPrice: 0
 		};
 	}
 
 	async componentDidMount() {
 		var UserId = 1;
 		debugger
+		//await fetch('api/ComputerComponent/GetUserOptions?UserId=' + UserId)
+		//	.then(response => response.json())
+		//	.then(data => {
+		//		//data.forEach((option: any) => {
+		//		//	option.products = [];
+		//		//});
+		//		console.log(data);
+		//		this.setState({
+		//			optionComputerComponent: data,
+		//		});
+		//	});
 		await fetch('api/ComputerComponent/GetUserOptions?UserId=' + UserId)
 			.then(response => response.json())
 			.then(data => {
-				//data.forEach((option: any) => {
-				//	option.products = [];
-				//});
-				console.log(data);
+				var saveComputerComponent = this.state.saveComputerComponent;
+				var totalPrice = this.state.totalPrice;
+				data.forEach((i: any) => {
+					this.state.saveComputerComponent.forEach((j: any) => {
+						if (i.type == j.id) {
+							j.product = i;
+							j.status = true;
+							console.log("lần 1");
+							console.log(j.status);
+						}
+					})
+				})
+
+				this.state.saveComputerComponent.forEach((j: any) => {
+					this.state.computerComponentDatas.forEach((k) => {
+						if (j.id == k.id) {
+							k.status = j.status;
+						}
+					})
+				})
+
+				this.state.saveComputerComponent.forEach((j: any) => {
+					if (j.product != null) {
+						var price = j.product.price ? j.product.price : "0";
+						var pricee = price.replace(".", "");
+						var priceee = pricee.replace(".", "");
+						var priceeee = priceee.replace("đ", "");
+
+						totalPrice +=
+							Object.keys(j.product).length === 0
+								? 0
+								: Number(priceeee) * j.product.quantity;
+					}
+				})
 				this.setState({
-					optionComputerComponent: data,
+					saveComputerComponent,
+					totalPrice
 				});
-			});
+				console.log("GetUserOptions")
+				console.log(saveComputerComponent);
+			})
 	}
+
+
 
 	ShowPopup = () => {
 		let isShowPopup = this.state.isShowPopup;
@@ -198,47 +331,67 @@ export default class Payment extends Component<any, any> {
 				<div className="container">
 					<div className="css-1c5m4ef">
 						<div className="css-l6dpr4">
-							{this.state.optionComputerComponent.map((item: any) => {
+							{this.state.saveComputerComponent.map((item: any, index: any) => {
 								return (
 									<div className="css-j0x69t">
 										<div className="card-body css-0">
 											<div className="css-1sbsckd">
 												<div className="css-16u6ie8">
-													<div className="css-x23u6">Vi xử lý</div>
+													<div className="css-x23u6">{item.name}</div>
 												</div>
 												<div className="css-16u6ie8">
 													<div className="css-g73s75">
-														<picture>
-															<source srcSet={item.url} type="image/webp"></source>
-															<source srcSet={item.name} type="image/png"></source>
-															<img className="lazyload css-jdz5ak" alt="" data-src={item.name} src={item.name} loading="lazy"></img>
-														</picture>
+														{
+															item.product ?
+																<picture>
+																	<source srcSet={item.product ? item.product.url : ""} type="image/webp"></source>
+																	<source srcSet={item.product ? item.product.name : ""} type="image/png"></source>
+																	<img className="lazyload css-jdz5ak" alt="" data-src={item.product ? item.product.name : ""} src={item.product ? item.product.name : ""} loading="lazy"></img>
+																</picture>
+																:
+																<img
+																	className="css-jdz5ak ls-is-cached lazyloaded"
+																	alt=""
+																	data-src={item.icon}
+																	src={item.icon}
+																></img>
+														}
 													</div>
 												</div>
-												<div className="css-1680iyu">
-													<div>
-														<a href="/bo-vi-xu-ly-cpu-intel-core-i79700-12m-cache-up-to-47ghz-s190900303.html" rel="noreferrer noopener" target="_blank" className="css-587jha">
-															<div className="css-1vrkwu6">{item.name}</div>
-														</a>
-														<span className="css-k5lh0a">{item.sku}</span>
-													</div>
-												</div>
-												<div className="css-114vf0c">
-													<div className="css-mx5oai">
-														<button className="css-1775qfl"><span color="#1435c3" className="css-1hoeh5r">x</span></button>
-														<div className="css-1hqugw1">1</div>
-														{/*<button className="css-1775qfl"><span className="css-139qrut">+</span></button>*/}
-													</div>
-												</div>
-												<div className="css-114vf0c">
-													<div className="css-iarkvp">
-														<div className="css-nel2x3">
-															<span className="css-wgeuy1">{item.price}<span className="css-1ul6wk9">đ</span></span>
-															<div className="css-1vptl7o"><span className="css-1lypflo">9.190.000<span className="css-1ul6wk9">đ</span></span></div>
+												{
+													item.product ?
+														<>
+															<div className="css-1680iyu">
+																<div>
+																	<a href="/bo-vi-xu-ly-cpu-intel-core-i79700-12m-cache-up-to-47ghz-s190900303.html" rel="noreferrer noopener" target="_blank" className="css-587jha">
+																		<div className="css-1vrkwu6">{item.product ? item.product.name : ""}</div>
+																	</a>
+																	<span className="css-k5lh0a">{item.product ? item.product.sku : ""}</span>
+																</div>
+															</div>
+															<div className="css-114vf0c">
+																<div className="css-mx5oai">
+																	<button className="css-1775qfl"><span color="#1435c3" className="css-1hoeh5r">x</span></button>
+																	<div className="css-1hqugw1">{item.product ? item.product.quantity : ""}</div>
+																	{/*<button className="css-1775qfl"><span className="css-139qrut">+</span></button>*/}
+																</div>
+															</div>
+															<div className="css-114vf0c">
+																<div className="css-iarkvp">
+																	<div className="css-nel2x3">
+																		<span className="css-wgeuy1">{item.product ? item.product.price : ""}<span className="css-1ul6wk9">đ</span></span>
+																		<div className="css-1vptl7o"><span className="css-1lypflo">9.190.000<span className="css-1ul6wk9">đ</span></span></div>
+																	</div>
+																</div>
+															</div>
+															<div className="css-16u6ie8"><button id="chooseComputerComponent" className="css-7ivzg6">Xóa</button></div>
+														</>
+														:
+														<div className="css-1680iyu">
+															<div>Vui lòng chọn linh kiện</div>
 														</div>
-													</div>
-												</div>
-												<div className="css-16u6ie8"><button id="chooseComputerComponent" className="css-7ivzg6">Xóa</button></div>
+												}
+
 											</div>
 										</div>
 									</div>
@@ -290,7 +443,7 @@ export default class Payment extends Component<any, any> {
 													</td>
 													<td className="css-aafp0n">
 														<span className="css-htm2b9">
-															75.025.000 <span className="css-1ul6wk9">đ</span>
+															{this.state.totalPrice} <span className="css-1ul6wk9">đ</span>
 														</span>
 													</td>
 												</tr>
