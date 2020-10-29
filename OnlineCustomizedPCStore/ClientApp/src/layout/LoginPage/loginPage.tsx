@@ -7,13 +7,13 @@ export default class LoginPage extends Component<any, any> {
 		super(props);
 		this.state = {
 			id: '',
-			usersign: '',
-			passsign: '',
+			usersign: 'Hai',
+			passsign: '123',
 			username: '',
 			password: '',
-			userEmail: '',
+			userEmail: 'viethai@gmail.com',
 			isActive: false,
-			data: [],
+			data: 1,
 		};
 	}
 
@@ -29,8 +29,8 @@ export default class LoginPage extends Component<any, any> {
 	public SignUp() {
 		debugger
 		const { usersign, passsign, userEmail, data } = this.state;
-		if (data !== 0 || usersign == '' || passsign == '') {
-			alert("Please fullfill username and password.")
+		if (/*data !== 0 || usersign == '' || passsign == ''*/ false) {
+			//alert("Please fullfill username and password.")
 		}
 		else {
 			axios({

@@ -59,13 +59,13 @@ var LoginPage = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.state = {
             id: '',
-            usersign: '',
-            passsign: '',
+            usersign: 'Hai',
+            passsign: '123',
             username: '',
             password: '',
-            userEmail: '',
+            userEmail: 'viethai@gmail.com',
             isActive: false,
-            data: [],
+            data: 1,
         };
         return _this;
     }
@@ -80,8 +80,8 @@ var LoginPage = /** @class */ (function (_super) {
         var _this = this;
         debugger;
         var _a = this.state, usersign = _a.usersign, passsign = _a.passsign, userEmail = _a.userEmail, data = _a.data;
-        if (data !== 0 || usersign == '' || passsign == '') {
-            alert("Please fullfill username and password.");
+        if ( /*data !== 0 || usersign == '' || passsign == ''*/false) {
+            //alert("Please fullfill username and password.")
         }
         else {
             axios_1.default({

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
+import { Route, Redirect } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
@@ -7,7 +7,7 @@ import { Counter } from './components/Counter';
 import Body from './layout/body';
 import Payment from './layout/paymentComponent/payment';
 import LoginPage from './layout/LoginPage/loginPage';
-import ReactNotification from 'react-notifications-component'
+//import ReactNotification from 'react-notifications-component'
 
 import './custom.css'
 
@@ -26,7 +26,7 @@ export default class App extends Component {
 			loggedInStatus: "LOGGED_IN",
 			user: data
 		})
-		this.props.Auth.setAuth(true)
+		//this.props.Auth.setAuth(true)
 		//Cookies.set("id", this.state.user[0].userID, { expires: 0.3124 })
 		//Cookies.set("user", this.state.user[0].userName, { expires: 0.3124 })
 		//Cookies.set("fullname", this.state.user[0].userFullName, { expires: 0.3124 })
@@ -46,40 +46,40 @@ export default class App extends Component {
 	//}
 
 	render() {
-		const Home = ({ auth, component: Component, ...props }) => {
-			return (
-				<Route
-					{...props}
-					render={(props) => auth ? (
-						<Body
-							{...props}
-							loggedInStatus={this.state.loggedInStatus}
-							//handleLogOut={this.handleLogOut}
-							user={this.state.user}
-						/>
-					) : <Redirect to='/login' />
-					}
-				/>
-			)
-		}
-		const Login = ({ auth, component: Component, ...props }) => {
-			return (
-				<Route
-					{...props}
-					render={(props) => !auth ? (
-						<LoginPage
-							{...props}
-							handleLogin={this.handleLogin}
-							handleLogOut={this.handleLogOut}
-							loggedInStatus={this.state.loggedInStatus} />
-					) : <Redirect to='/home' />
-					}
-				/>
-			)
-		}
+		//const Home = ({ auth, component: Component, ...props }) => {
+		//	return (
+		//		<Route
+		//			{...props}
+		//			render={(props) => auth ? (
+		//				<Body
+		//					{...props}
+		//					loggedInStatus={this.state.loggedInStatus}
+		//					//handleLogOut={this.handleLogOut}
+		//					user={this.state.user}
+		//				/>
+		//			) : <Redirect to='/login' />
+		//			}
+		//		/>
+		//	)
+		//}
+		//const Login = ({ auth, component: Component, ...props }) => {
+		//	return (
+		//		<Route
+		//			{...props}
+		//			render={(props) => !auth ? (
+		//				<LoginPage
+		//					{...props}
+		//					handleLogin={this.handleLogin}
+		//					handleLogOut={this.handleLogOut}
+		//					loggedInStatus={this.state.loggedInStatus} />
+		//			) : <Redirect to='/home' />
+		//			}
+		//		/>
+		//	)
+		//}
 		return (
 			<>
-				<ReactNotification />
+
 				<Layout
 					loggedInStatus={this.state.loggedInStatus}
 					handleLogOut={this.handleLogOut}
@@ -88,9 +88,9 @@ export default class App extends Component {
 					<Route exact path='/' component={Home} />
 					<Route path='/counter' component={Counter} />
 					<Route path='/fetch-data' component={FetchData} />
-					<Home path='/home' component={Body} auth={this.props.Auth.auth}/>
+					<Route path='/home' component={Body}/* auth={this.props.Auth.auth}*//>
 					<Route path='/cart' component={Payment} />
-					<Login path='/login' component={LoginPage} auth={this.props.Auth.auth}/>
+					<Route path='/login' component={LoginPage}/* auth={this.props.Auth.auth}*//>
 				</Layout>
 			</>
 		);
