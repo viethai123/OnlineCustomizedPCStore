@@ -84,6 +84,46 @@ namespace OnlineCustomizedPCStore.Model
             }
             return userAccounts;
         }
+
+        public List<UserAccountModel> ListUserName(string Name)
+        {
+            string query = "select Name from UserAccount" +
+                " where Name = @Name";
+
+            List<UserAccountModel> userAccounts = new List<UserAccountModel>();
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+            {
+                new SqlParameter("@Name", Name),
+            };
+
+            try
+            {
+                SqlDataReader reader = SqlHelper.ExecuteReader(Startup.ConnectionString, CommandType.Text, query, parameters.ToArray());
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        UserAccountModel useraccount = new UserAccountModel
+                        {
+                            Name = reader.GetString(0),
+                        };
+                        userAccounts.Add(useraccount);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows found.");
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return userAccounts;
+        }
     }
 
 

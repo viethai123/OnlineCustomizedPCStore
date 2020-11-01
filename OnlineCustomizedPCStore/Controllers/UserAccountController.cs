@@ -35,5 +35,14 @@ namespace OnlineCustomizedPCStore.Controllers
                     yield return item;
             }
         }
+
+        [HttpPost("[action]")]
+        public IEnumerable<UserAccountModel> CheckUserName(string Name)
+        {
+            UserAccountModel userAccount = new UserAccountModel();
+            List<UserAccountModel> userAccounts = userAccount.ListUserName(Name);
+            return userAccounts;
+
+        }
     }
 }

@@ -21,13 +21,26 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\layout\LoginPage\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\layout\LoginPage\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\layout\LoginPage\loginPage.tsx" />
+    <Compile Remove="ClientApp\src\layout\LoginPage\**" />
+    <EmbeddedResource Remove="ClientApp\src\layout\LoginPage\**" />
+    <TypeScriptCompile Remove="ClientApp\src\layout\LoginPage\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\layout\LoginPage\loginContent.js" />
+    <None Remove="ClientApp\src\layout\LoginPage\loginContent.js.map" />
     <None Remove="webpack-config.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\src\components\UserProfile.tsx" />
   </ItemGroup>
 
   <ItemGroup>
