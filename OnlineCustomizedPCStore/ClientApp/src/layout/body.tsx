@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 import * as React from "react";
 import { Component } from "react";
 import SlideShow from "./componentsBody/slideShow/slideShow";
@@ -7,6 +8,7 @@ import Header from "./header";
 import Footer from "./footer"
 import '../App.css';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export default class Body extends Component<any, any> {
 	constructor(props: any) {
@@ -263,12 +265,16 @@ export default class Body extends Component<any, any> {
 				},
 			],
 			totalPrice: 0,
-
+			UserId: /*Cookies.get('id')*/1,
 		};
 	}
 
 	async componentDidMount() {
-		var UserId = 1;
+		debugger
+		console.log("Loginnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
+		console.log(this.props.loggedInStatus);
+		console.log(this.props.user)
+		var UserId = this.props.loggedInStatus == 'LOGGED_IN' ? this.props.user[0].id : this.state.UserId;
 		await fetch('api/ComputerComponent/GetUserOptions?UserId=' + UserId)
 			.then(response => response.json())
 			.then(data => {
@@ -479,7 +485,7 @@ export default class Body extends Component<any, any> {
 		var ProcessorSku = saveComputerComponent[0].product.sku ? saveComputerComponent[0].product.sku : "0";
 		var QuantityProcessor = saveComputerComponent[0].product.quantity ? saveComputerComponent[0].product.quantity : 0;
 		var MainboarSku = saveComputerComponent[1].product ? saveComputerComponent[1].product.sku : "0";
-		var UserId = 1;
+		var UserId = this.state.UserId;
 		var message = 0;
 		var IsUserChooseOrNot = 0;
 
@@ -487,7 +493,7 @@ export default class Body extends Component<any, any> {
 			method: 'get',
 			url: 'api/UserCart/CheckUserChooseOrNot',
 			params: {
-				UserId: 1,
+				UserId: UserId,
 			}
 		})
 			.then(function (response) {
@@ -587,7 +593,7 @@ export default class Body extends Component<any, any> {
 	//}
 
 	async GetUserOption() {
-		var UserId = 1;
+		var UserId = this.state.UserId;
 		var message = 0;
 
 		await fetch('api/ComputerComponent/GetUserOption?UserID=' + UserId)

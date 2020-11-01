@@ -34,8 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\layout\LoginPage\loginContent.js" />
-    <None Remove="ClientApp\src\layout\LoginPage\loginContent.js.map" />
+    <None Remove="ClientApp\src\layout\LoginPage\LogInPage.tsx" />
     <None Remove="webpack-config.ts" />
   </ItemGroup>
 
@@ -50,6 +49,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\layout\LoginPage\LogInPage.tsx" />
     <TypeScriptCompile Include="webpack-config.ts" />
   </ItemGroup>
 

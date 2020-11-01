@@ -67,6 +67,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/* eslint-disable import/first */
 var React = require("react");
 var react_1 = require("react");
 var slideShow_1 = require("./componentsBody/slideShow/slideShow");
@@ -434,6 +435,7 @@ var Body = /** @class */ (function (_super) {
                 },
             ],
             totalPrice: 0,
+            UserId: /*Cookies.get('id')*/ 1,
         };
         return _this;
     }
@@ -444,7 +446,11 @@ var Body = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        UserId = 1;
+                        debugger;
+                        console.log("Loginnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+                        console.log(this.props.loggedInStatus);
+                        console.log(this.props.user);
+                        UserId = this.props.loggedInStatus == 'LOGGED_IN' ? this.props.user[0].id : this.state.UserId;
                         return [4 /*yield*/, fetch('api/ComputerComponent/GetUserOptions?UserId=' + UserId)
                                 .then(function (response) { return response.json(); })
                                 .then(function (data) {
@@ -513,14 +519,14 @@ var Body = /** @class */ (function (_super) {
                         ProcessorSku = saveComputerComponent[0].product.sku ? saveComputerComponent[0].product.sku : "0";
                         QuantityProcessor = saveComputerComponent[0].product.quantity ? saveComputerComponent[0].product.quantity : 0;
                         MainboarSku = saveComputerComponent[1].product ? saveComputerComponent[1].product.sku : "0";
-                        UserId = 1;
+                        UserId = this.state.UserId;
                         message = 0;
                         IsUserChooseOrNot = 0;
                         return [4 /*yield*/, axios_1.default({
                                 method: 'get',
                                 url: 'api/UserCart/CheckUserChooseOrNot',
                                 params: {
-                                    UserId: 1,
+                                    UserId: UserId,
                                 }
                             })
                                 .then(function (response) {
@@ -636,7 +642,7 @@ var Body = /** @class */ (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        UserId = 1;
+                        UserId = this.state.UserId;
                         message = 0;
                         return [4 /*yield*/, fetch('api/ComputerComponent/GetUserOption?UserID=' + UserId)
                                 .then(function (response) { return response.json(); })
