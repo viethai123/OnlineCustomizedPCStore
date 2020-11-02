@@ -435,7 +435,7 @@ var Body = /** @class */ (function (_super) {
                 },
             ],
             totalPrice: 0,
-            UserId: /*Cookies.get('id')*/ 1,
+            UserId: 1 /*Cookies.get('id')*/,
         };
         return _this;
     }

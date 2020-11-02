@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
+import UserProfile from '../layout/LoginPage/UserProfile';
+import Cookies from 'js-cookie';
 
 export class NavMenu extends Component {
 	static displayName = NavMenu.name;
@@ -11,7 +13,8 @@ export class NavMenu extends Component {
 
 		this.toggleNavbar = this.toggleNavbar.bind(this);
 		this.state = {
-			collapsed: true
+			collapsed: true,
+			user: Cookies.get('user')
 		};
 	}
 
@@ -19,6 +22,11 @@ export class NavMenu extends Component {
 		this.setState({
 			collapsed: !this.state.collapsed
 		});
+	}
+
+	handleLogOutClick() {
+		//this.props.handleLogOut();
+		console.log("handleLogOut");
 	}
 
 	render() {
@@ -45,9 +53,20 @@ export class NavMenu extends Component {
 								<NavItem>
 									<NavLink tag={Link} className="text-dark" to="/cart">Cart</NavLink>
 								</NavItem>
-								<NavItem>
-									<NavLink tag={Link} className="text-dark" to="/LoginPage">Login</NavLink>
-								</NavItem>
+								{this.props.loggedInStatus == "NOT_LOGGED_IN" && this.state.user == null ?
+									<NavItem>
+										<NavLink tag={Link} className="text-dark" to="/LoginPage">User Log In</NavLink>
+									</NavItem> :
+									<NavItem>
+										<NavLink className="text-dark">
+											<UserProfile
+												loggedInStatus={this.props.loggedInStatus}
+												user={this.props.user}
+												handleLogOut={this.props.handleLogOut}
+											/>
+										</NavLink>
+									</NavItem>
+								}
 							</ul>
 						</Collapse>
 					</Container>

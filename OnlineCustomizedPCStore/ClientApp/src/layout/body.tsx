@@ -265,7 +265,7 @@ export default class Body extends Component<any, any> {
 				},
 			],
 			totalPrice: 0,
-			UserId: /*Cookies.get('id')*/1,
+			UserId: Cookies.get('id'),
 		};
 	}
 
