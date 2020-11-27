@@ -18,6 +18,13 @@ export class NavMenu extends Component {
 		};
 	}
 
+	componentDidMount() {
+		const script = document.createElement("script");
+		script.src = "../script.js";
+		script.async = true;
+		document.body.appendChild(script);
+	}
+
 	toggleNavbar() {
 		this.setState({
 			collapsed: !this.state.collapsed
@@ -40,6 +47,9 @@ export class NavMenu extends Component {
 							<ul className="navbar-nav flex-grow">
 								<NavItem>
 									<NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+								</NavItem>
+								<NavItem>
+									<NavLink tag={Link} className="text-dark" to="/homepage">HomePage</NavLink>
 								</NavItem>
 								<NavItem>
 									<NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
@@ -72,6 +82,7 @@ export class NavMenu extends Component {
 					</Container>
 				</Navbar>
 			</header>
+
 		);
 	}
 }

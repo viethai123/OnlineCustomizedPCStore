@@ -11,6 +11,7 @@ import ReactNotification from 'react-notifications-component'
 import '../src/App.css';
 import Cookies from 'js-cookie'
 import AuthApi from './layout/LoginPage/AuthApi'
+import HomePage from './layout/HomePage';
 class App extends Component {
 	static displayName = App.name;
 	constructor(props) {
@@ -93,6 +94,7 @@ class App extends Component {
 						exact path={'/'}
 						component={Home}
 					/>
+					<Route path='/homepage' component={HomePage} />
 					<Route path='/counter' component={Counter} />
 					<Route path='/fetch-data' component={FetchData} />
 					<Home
