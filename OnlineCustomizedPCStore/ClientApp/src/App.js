@@ -12,6 +12,7 @@ import '../src/App.css';
 import Cookies from 'js-cookie'
 import AuthApi from './layout/LoginPage/AuthApi'
 import HomePage from './layout/HomePage';
+import '../src/script.js';
 class App extends Component {
 	static displayName = App.name;
 	constructor(props) {
@@ -112,6 +113,7 @@ class App extends Component {
 					/>
 				</Layout>
 			</div>
+			//<HomePage />
 		);
 	}
 }

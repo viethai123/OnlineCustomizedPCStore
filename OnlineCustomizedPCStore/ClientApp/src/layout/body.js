@@ -77,6 +77,7 @@ var header_1 = require("./header");
 var footer_1 = require("./footer");
 require("../App.css");
 var axios_1 = require("axios");
+var js_cookie_1 = require("js-cookie");
 var Body = /** @class */ (function (_super) {
     __extends(Body, _super);
     function Body(props) {
@@ -435,7 +436,7 @@ var Body = /** @class */ (function (_super) {
                 },
             ],
             totalPrice: 0,
-            UserId: 1 /*Cookies.get('id')*/,
+            UserId: js_cookie_1.default.get('id'),
         };
         return _this;
     }

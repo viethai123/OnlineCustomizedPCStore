@@ -12,11 +12,10 @@ export class Layout extends Component {
 					handleLogOut={this.props.handleLogOut}
 					loggedInStatus={this.props.loggedInStatus}
 					user={this.props.user}
-
 				/>
-				<Container>
+				<>
 					{this.props.children}
-				</Container>
+				</>
 			</div>
 		);
 	}
