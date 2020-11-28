@@ -113,7 +113,6 @@ class App extends Component {
 					/>
 				</Layout>
 			</div>
-			//<HomePage />
 		);
 	}
 }

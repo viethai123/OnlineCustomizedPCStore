@@ -612,7 +612,6 @@ export default class Body extends Component<any, any> {
 		console.log(this.state.saveComputerComponent)
 		return (
 			<div className="main">
-				<Header />
 				<div className="body">
 					<div className="container">
 						<SlideShow imageSlideShowData={this.state.imageSlideShowData} />
