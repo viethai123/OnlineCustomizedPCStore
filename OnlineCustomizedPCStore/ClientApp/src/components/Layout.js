@@ -12,6 +12,8 @@ export class Layout extends Component {
 					handleLogOut={this.props.handleLogOut}
 					loggedInStatus={this.props.loggedInStatus}
 					user={this.props.user}
+					ChangeColorMode={this.props.ChangeColorMode}
+					themeMode={this.props.themeMode}
 				/>
 				<>
 					{this.props.children}

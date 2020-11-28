@@ -20,6 +20,7 @@ class App extends Component {
 		this.state = {
 			loggedInStatus: "NOT_LOGGED_IN",
 			user: {},
+			themeMode: true
 		}
 		this.handleLogin = this.handleLogin.bind(this);
 		this.handleLogOut = this.handleLogOut.bind(this);
@@ -46,6 +47,12 @@ class App extends Component {
 		Cookies.remove('id')
 		Cookies.remove('user')
 		Cookies.remove('email')
+	}
+
+	ChangeColorMode = () => {
+		this.setState(prevState => ({
+			themeMode: !prevState.themeMode
+		}));
 	}
 
 
@@ -81,6 +88,18 @@ class App extends Component {
 				/>
 			)
 		}
+		//const HomeMain = ({component: Component}) => {
+		//	return (
+		//		<Route
+		//			render={() => (
+		//				<HomePage
+		//					themeMode={this.state.themeMode}
+		//				/>
+		//			)
+		//			}
+		//		/>
+		//	)
+		//}
 		return (
 			<div>
 				<ReactNotification />
@@ -89,13 +108,17 @@ class App extends Component {
 					loggedInStatus={this.state.loggedInStatus}
 					handleLogOut={this.handleLogOut}
 					user={this.state.user}
+					ChangeColorMode={() => this.ChangeColorMode()}
+					themeMode={this.state.themeMode}
 				>
 
 					<Route
 						exact path={'/'}
 						component={Home}
 					/>
-					<Route path='/homepage' component={HomePage} />
+					<Route path="/homepage" render={props =>
+						(<HomePage {...props} themeMode={this.state.themeMode} />)
+						} />
 					<Route path='/counter' component={Counter} />
 					<Route path='/fetch-data' component={FetchData} />
 					<Home

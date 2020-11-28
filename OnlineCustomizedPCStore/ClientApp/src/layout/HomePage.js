@@ -23,7 +23,7 @@ var HomePage = /** @class */ (function (_super) {
         return _this;
     }
     HomePage.prototype.render = function () {
-        return (React.createElement(React.Fragment, null,
+        return (React.createElement("div", { className: this.props.themeMode ? "dark-mode" : "light-mode" },
             React.createElement("section", { className: "main-wrapper xs-col-12" },
                 React.createElement("div", { id: "homepage" },
                     React.createElement("div", { className: "wrapper wrapper__buildGuides" },

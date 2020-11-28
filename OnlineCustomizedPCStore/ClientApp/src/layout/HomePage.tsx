@@ -11,7 +11,7 @@ export default class HomePage extends Component<any, any> {
 
 	render() {
 		return (
-			<>
+			<div className={this.props.themeMode ? "dark-mode" : "light-mode"}>
 				<section className="main-wrapper xs-col-12">
 					<div id="homepage">
 						<div className="wrapper wrapper__buildGuides">
@@ -291,7 +291,7 @@ export default class HomePage extends Component<any, any> {
 						</div>
 					</div>
 				</section>
-			</>
+			</div>
 		);
 	}
 }
