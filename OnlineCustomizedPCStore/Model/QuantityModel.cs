@@ -42,6 +42,63 @@ namespace OnlineCustomizedPCStore.Model
 			return rowsAffected;
 		}
 
+		public int AddCompletedBuildOption(string ProcessorSku, string MainboarSku, string RAMSku, string HDDSku, string SSDSku, string VGASku,
+			string SourceSku, string CaseSku, string RadiatorsSku, string ScreenSku, string KeyboardSku, string MouseSku, string HeadphoneSku,
+			string SpeakersSku, int Quantity, int UserId)
+		{
+			string query = "insert into Quantity(Quantity, SKU, UserId)"
+						    + "values (@Quantity,@ProcessorSku, @UserId),"
+							+ "(@Quantity,@MainboarSku, @UserId),"
+							+ "(@Quantity,@RAMSku, @UserId),"
+							+ "(@Quantity,@HDDSku, @UserId),"
+							+ "(@Quantity,@SSDSku, @UserId),"
+							+ "(@Quantity,@VGASku, @UserId),"
+							+ "(@Quantity,@SourceSku, @UserId),"
+							+ "(@Quantity,@CaseSku, @UserId),"
+							+ "(@Quantity,@RadiatorsSku, @UserId),"
+							+ "(@Quantity,@ScreenSku, @UserId),"
+							+ "(@Quantity,@KeyboardSku, @UserId),"
+							+ "(@Quantity,@MouseSku, @UserId),"
+							+ "(@Quantity,@HeadphoneSku, @UserId),"
+							+ "(@Quantity,@SpeakersSku, @UserId)";
+			List<SqlParameter> parameters = new List<SqlParameter>
+			{
+
+				new SqlParameter("@ProcessorSku", ProcessorSku),
+				new SqlParameter("@MainboarSku", MainboarSku),
+				new SqlParameter("@RAMSku", RAMSku),
+				new SqlParameter("@HDDSku", HDDSku),
+				new SqlParameter("@SSDSku", SSDSku),
+				new SqlParameter("@VGASku", VGASku),
+				new SqlParameter("@SourceSku", SourceSku),
+				new SqlParameter("@CaseSku", CaseSku),
+				new SqlParameter("@RadiatorsSku", RadiatorsSku),
+				new SqlParameter("@ScreenSku", ScreenSku),
+				new SqlParameter("@KeyboardSku", KeyboardSku),
+				new SqlParameter("@MouseSku", MouseSku),
+				new SqlParameter("@HeadphoneSku", HeadphoneSku),
+				new SqlParameter("@SpeakersSku", SpeakersSku),
+
+				new SqlParameter("@Quantity", Quantity),
+				new SqlParameter("@UserId", UserId),
+			};
+			int rowsAffected = 0;
+			try
+			{
+				rowsAffected = SqlHelper.ExecuteNonQuery(Startup.ConnectionString,
+				   CommandType.Text, query, parameters.ToArray());
+				if (rowsAffected == -1)
+				{
+					Console.WriteLine("Error occurs!");
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+			return rowsAffected;
+		}
+
 		public int UpdateUserOptionQuantity(string SKU, int Quantity, int UserId)
 		{
 			string query = "update Quantity"

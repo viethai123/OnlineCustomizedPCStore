@@ -20,6 +20,18 @@ namespace OnlineCustomizedPCStore.Controllers
 			return rowAffected;
 		}
 
+		[HttpPost("[action]")]
+		public int AddCompletedBuildOption(string ProcessorSku, string MainboarSku, string RAMSku, string HDDSku, string SSDSku, string VGASku,
+			string SourceSku, string CaseSku, string RadiatorsSku, string ScreenSku, string KeyboardSku, string MouseSku, string HeadphoneSku,
+			string SpeakersSku, int Quantity, int UserId)
+		{
+			QuantityModel quantity = new QuantityModel();
+			int rowAffected = quantity.AddCompletedBuildOption(ProcessorSku, MainboarSku, RAMSku, HDDSku, SSDSku, VGASku,
+			SourceSku, CaseSku, RadiatorsSku, ScreenSku, KeyboardSku, MouseSku, HeadphoneSku,
+			SpeakersSku, Quantity, UserId);
+			return rowAffected;
+		}
+
 		[HttpPut("[action]")]
 		public int UpdateUserOptionQuantity(string SKU, int Quantity, int UserId)
 		{

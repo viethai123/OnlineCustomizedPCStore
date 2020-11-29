@@ -19,19 +19,21 @@ namespace OnlineCustomizedPCStore.Controllers
 				yield return item;
 			}
 		}
+
 		[HttpPost("[action]")]
-		public int AddUserOption(string ProcessorSku, string MainboarSku, int UserId)
+		public int AddUserOption(string ProcessorSku, string MainboarSku, string RAMSku, string HDDSku, string SSDSku, string VGASku, string SourceSku, string CaseSku,
+			string RadiatorsSku, string ScreenSku, string KeyboardSku, string MouseSku, string HeadphoneSku, string SpeakersSku, int UserId)
 		{
 			UserCartModel userCart = new UserCartModel();
-			int rowAffected = userCart.AddUserOption(ProcessorSku, MainboarSku, UserId);
+			int rowAffected = userCart.AddUserOption(ProcessorSku, MainboarSku, RAMSku, HDDSku, SSDSku, VGASku, SourceSku, CaseSku, RadiatorsSku, ScreenSku, KeyboardSku, MouseSku, HeadphoneSku, SpeakersSku, UserId);
 			return rowAffected;
 		}
 
 		[HttpPut("[action]")]
-		public int UpdateUserOption(string ProcessorSku, string MainboarSku, int UserId)
+		public int UpdateUserOption(string ProcessorSku, string MainboarSku, string RAMSku, string HDDSku, string SSDSku, string VGASku, string SourceSku, string CaseSku, string RadiatorsSku, string ScreenSku, string KeyboardSku, string MouseSku, string HeadphoneSku, string SpeakersSku, int UserId)
 		{
 			UserCartModel userCart = new UserCartModel();
-			int rowAffected = userCart.UpdateUserOption(ProcessorSku, MainboarSku, UserId);
+			int rowAffected = userCart.UpdateUserOption(ProcessorSku, MainboarSku, RAMSku, HDDSku, SSDSku, VGASku, SourceSku, CaseSku, RadiatorsSku, ScreenSku, KeyboardSku, MouseSku, HeadphoneSku, SpeakersSku, UserId);
 			return rowAffected;
 		}
 

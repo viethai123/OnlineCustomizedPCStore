@@ -59,7 +59,9 @@ namespace OnlineCustomizedPCStore.Model
 		{
 			string query = @"select cc.Id, Name, URL, cc.SKU, Price, Type, q.Quantity, q.UserId 
 							from ComputerComponent as cc 
-							join UserCart uc on uc.ProcessorSku = cc.SKU or uc.MainboarSku = cc.SKU 
+							join UserCart uc on uc.ProcessorSku = cc.SKU or uc.MainboarSku = cc.SKU or uc.RAMSku = cc.SKU or uc.HDDSku = cc.SKU or uc.SSDSku = cc.SKU
+											or uc.VGASku = cc.SKU or uc.SourceSku = cc.SKU or uc.CaseSku = cc.SKU or uc.RadiatorsSku = cc.SKU or uc.ScreenSku = cc.SKU 
+											or uc.KeyboardSku = cc.SKU or uc.MouseSku = cc.SKU or uc.HeadphoneSku = cc.SKU or uc.SpeakersSku = cc.SKU
 							join Quantity as q on q.SKU = cc.SKU 
 							where q.UserId = @UserId and uc.UserId = @UserId";
 

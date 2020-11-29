@@ -13,6 +13,7 @@ import Cookies from 'js-cookie'
 import AuthApi from './layout/LoginPage/AuthApi'
 import HomePage from './layout/HomePage';
 import '../src/script.js';
+import CompletedBuild from './layout/CompletedBuildComponent/CompletedBuild';
 class App extends Component {
 	static displayName = App.name;
 	constructor(props) {
@@ -114,13 +115,14 @@ class App extends Component {
 
 					<Route
 						exact path={'/'}
-						component={Home}
+						component={HomePage}
 					/>
 					<Route path="/homepage" render={props =>
 						(<HomePage {...props} themeMode={this.state.themeMode} />)
 						} />
 					<Route path='/counter' component={Counter} />
 					<Route path='/fetch-data' component={FetchData} />
+					<Route path='/completed-build' component={CompletedBuild} />
 					<Home
 						exact
 						path={'/home'}

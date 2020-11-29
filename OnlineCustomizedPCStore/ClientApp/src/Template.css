@@ -1,4 +1,4 @@
-
+﻿
 
 @charset "UTF-8";
 @keyframes fadeinout {
@@ -5526,11 +5526,12 @@ input {
       right: 1.5rem; }
       .logGroup__card .log__author .log__featured svg {
         fill: #ff9115; }
-  .logGroup__card .log__image {
+.logGroup__card .log__image {
     display: block;
-    min-height: 225px;
+    min-height: 217px;
     background-size: cover;
-    background-position: center center; }
+    background-position: center center;
+}
   .logGroup__card .logStatus {
     padding: 0 1.5rem;
     margin: 1rem 0; }
@@ -12675,7 +12676,7 @@ ul.list-sortable {
     padding-left: 1rem;
     padding-right: 1rem; }
   .logGroup__card .log__image {
-    min-height: 150px; }
+    min-height: 217px; }
   .logGroup__card .log__title {
     font-size: 0.875rem;
     padding-left: 1rem;

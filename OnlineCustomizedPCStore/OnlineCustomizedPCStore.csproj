@@ -34,6 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\layout\CompletedBuildComponent\BuildComponent.tsx" />
+    <None Remove="ClientApp\src\layout\CompletedBuildComponent\CompletedBuild.tsx" />
     <None Remove="ClientApp\src\layout\HomePage.tsx" />
     <None Remove="ClientApp\src\layout\LoginPage\LogInPage.tsx" />
     <None Remove="webpack-config.ts" />

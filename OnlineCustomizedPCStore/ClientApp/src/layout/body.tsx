@@ -319,6 +319,7 @@ export default class Body extends Component<any, any> {
 				console.log("GetUserOptions")
 				console.log(saveComputerComponent);
 			})
+
 		await fetch('api/ComputerComponent/ListOfComputerComponent')
 			.then(response => response.json())
 			.then(data => {
@@ -480,11 +481,25 @@ export default class Body extends Component<any, any> {
 	};
 
 	async AddUserOption() {
-
+		debugger
+		//var QuantityProcessor = saveComputerComponent[0].product.quantity ? saveComputerComponent[0].product.quantity : 0;
 		var saveComputerComponent = this.state.saveComputerComponent;
-		var ProcessorSku = saveComputerComponent[0].product.sku ? saveComputerComponent[0].product.sku : "0";
-		var QuantityProcessor = saveComputerComponent[0].product.quantity ? saveComputerComponent[0].product.quantity : 0;
+
+		var ProcessorSku = saveComputerComponent[0].product ? saveComputerComponent[0].product.sku : "0";
 		var MainboarSku = saveComputerComponent[1].product ? saveComputerComponent[1].product.sku : "0";
+		var RAMSku = saveComputerComponent[2].product ? saveComputerComponent[2].product.sku : "0";
+		var HDDSku = saveComputerComponent[3].product ? saveComputerComponent[3].product.sku : "0";
+		var SSDSku = saveComputerComponent[4].product ? saveComputerComponent[4].product.sku : "0";
+		var VGASku = saveComputerComponent[5].product ? saveComputerComponent[5].product.sku : "0";
+		var SourceSku = saveComputerComponent[6].product ? saveComputerComponent[6].product.sku : "0";
+		var CaseSku = saveComputerComponent[7].product ? saveComputerComponent[7].product.sku : "0";
+		var RadiatorsSku = saveComputerComponent[8].product ? saveComputerComponent[8].product.sku : "0";
+		var ScreenSku = saveComputerComponent[9].product ? saveComputerComponent[9].product.sku : "0";
+		var KeyboardSku = saveComputerComponent[10].product ? saveComputerComponent[10].product.sku : "0";
+		var MouseSku = saveComputerComponent[11].product ? saveComputerComponent[11].product.sku : "0";
+		//var HeadphoneSku = saveComputerComponent[12].product ? saveComputerComponent[12].product.sku : "0";
+		//var SpeakersSku = saveComputerComponent[13].product ? saveComputerComponent[13].product.sku : "0";
+
 		var UserId = this.state.UserId;
 		var message = 0;
 		var IsUserChooseOrNot = 0;
@@ -508,6 +523,19 @@ export default class Body extends Component<any, any> {
 				params: {
 					ProcessorSku: ProcessorSku,
 					MainboarSku: MainboarSku,
+					RAMSku: RAMSku,
+					HDDSku: HDDSku,
+					SSDSku: SSDSku,
+					VGASku: VGASku,
+					SourceSku: SourceSku,
+					CaseSku: CaseSku,
+					RadiatorsSku: RadiatorsSku,
+					ScreenSku: ScreenSku,
+					KeyboardSku: KeyboardSku,
+					MouseSku: MouseSku,
+					HeadphoneSku: "0",
+					SpeakersSku: "0",
+
 					UserId: UserId
 				}
 			})
@@ -547,6 +575,19 @@ export default class Body extends Component<any, any> {
 				params: {
 					ProcessorSku: ProcessorSku,
 					MainboarSku: MainboarSku,
+					RAMSku: RAMSku,
+					HDDSku: HDDSku,
+					SSDSku: SSDSku,
+					VGASku: VGASku,
+					SourceSku: SourceSku,
+					CaseSku: CaseSku,
+					RadiatorsSku: RadiatorsSku,
+					ScreenSku: ScreenSku,
+					KeyboardSku: KeyboardSku,
+					MouseSku: MouseSku,
+					HeadphoneSku: "0",
+					SpeakersSku: "0",
+
 					UserId: UserId
 				}
 			})
@@ -554,19 +595,24 @@ export default class Body extends Component<any, any> {
 					console.log(response);
 					message = response.data;
 				});
-			await axios({
-				method: 'post',
-				url: 'api/Quantity/AddUserOptionQuantity',
-				params: {
-					SKU: ProcessorSku,
-					UserId: UserId,
-					Quantity: QuantityProcessor
+
+			saveComputerComponent.forEach((computerComponent: any) => {
+				if (computerComponent.product != null) {
+					axios({
+						method: 'post',
+						url: 'api/Quantity/AddUserOptionQuantity',
+						params: {
+							SKU: computerComponent.product.sku,
+							Quantity: computerComponent.product.quantity,
+							UserId: UserId,
+						}
+					})
+						.then(function (response) {
+							console.log(response);
+							message = response.data;
+						});
 				}
-			})
-				.then(function (response) {
-					console.log(response);
-					message = response.data;
-				});
+			});
 		}
 	}
 

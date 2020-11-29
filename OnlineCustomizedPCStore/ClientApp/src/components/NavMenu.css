@@ -8901,7 +8901,7 @@ input {
 
 .logGroup__card .log__image {
     display: block;
-    min-height: 225px;
+    min-height: 217px;
     background-size: cover;
     background-position: center center;
 }
@@ -20282,7 +20282,7 @@ ul.list-sortable {
     }
 
     .logGroup__card .log__image {
-        min-height: 150px;
+        min-height: 217px;
     }
 
     .logGroup__card .log__title {
