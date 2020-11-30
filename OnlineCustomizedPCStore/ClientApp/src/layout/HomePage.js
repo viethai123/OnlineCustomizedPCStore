@@ -12,6 +12,42 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var react_1 = require("react");
@@ -19,10 +55,61 @@ var HomePage = /** @class */ (function (_super) {
     __extends(HomePage, _super);
     function HomePage(props) {
         var _this = _super.call(this, props) || this;
-        _this.state = {};
+        _this.state = {
+            TopAMD: {},
+            TopIntel: {},
+            CompletedBuilds: []
+        };
         return _this;
     }
+    HomePage.prototype.componentDidMount = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        debugger;
+                        return [4 /*yield*/, fetch('api/CompletedBuild/ListOfCompletedBuild')
+                                .then(function (response) { return response.json(); })
+                                .then(function (data) {
+                                _this.setState({
+                                    CompletedBuilds: data,
+                                });
+                                console.log(_this.state.CompletedBuilds);
+                                var AMD2 = 0;
+                                var Intel2 = 0;
+                                data.forEach(function (item) {
+                                    var TopAMD = _this.state.TopAMD;
+                                    var TopIntel = _this.state.TopIntel;
+                                    debugger;
+                                    if (item.type === 1) {
+                                        var AMD = item.rate;
+                                        if (AMD > AMD2) {
+                                            AMD2 = AMD;
+                                            TopAMD = item;
+                                            _this.setState({ TopAMD: TopAMD });
+                                        }
+                                    }
+                                    if (item.type === 2) {
+                                        var Intel = item.rate;
+                                        if (Intel > Intel2) {
+                                            Intel2 = Intel;
+                                            TopIntel = item;
+                                            _this.setState({ TopIntel: TopIntel });
+                                        }
+                                    }
+                                });
+                            })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     HomePage.prototype.render = function () {
+        console.log(this.state.TopAMD);
+        console.log(this.state.TopIntel);
         return (React.createElement("div", { className: this.props.themeMode ? "dark-mode" : "light-mode" },
             React.createElement("section", { className: "main-wrapper xs-col-12" },
                 React.createElement("div", { id: "homepage" },
@@ -37,9 +124,9 @@ var HomePage = /** @class */ (function (_super) {
                                 React.createElement("div", { className: "guideGroup__content--wrapper1" },
                                     React.createElement("h1", { className: "guide__title" }, "Entry Level AMD Gaming Build"),
                                     React.createElement("ul", { className: "guide__keyProducts list-unstyled" },
-                                        React.createElement("li", null, "AMD Ryzen 5 2600"),
-                                        React.createElement("li", null, "Parametric Video Card (Chipset: GeForce GTX 1650 SUPER)"),
-                                        React.createElement("li", null, "Cougar MX330 ATX Mid Tower"))),
+                                        React.createElement("li", null, this.state.TopAMD.processorSku),
+                                        React.createElement("li", null, this.state.TopAMD.vgaSku),
+                                        React.createElement("li", null, this.state.TopAMD.radiatorsSku))),
                                 React.createElement("div", { className: "guideGroup__content--wrapper2" },
                                     React.createElement("div", { className: "guide__numbers" },
                                         React.createElement("p", { className: "guide__price" }, "$582.93"),
@@ -47,7 +134,7 @@ var HomePage = /** @class */ (function (_super) {
                                             React.createElement("span", { className: "guide__link--comments" },
                                                 React.createElement("svg", { className: "icon shape-comment" },
                                                     React.createElement("use", { xlinkHref: "#shape-comment" })),
-                                                "189"))),
+                                                this.state.TopAMD.rate))),
                                     React.createElement("ul", { className: "guide__images list-unstyled" },
                                         React.createElement("li", { className: "guide__images--1" },
                                             React.createElement("img", { src: "https://images-na.ssl-images-amazon.com/images/I/51N2BQA3cBL.jpg" })),
@@ -60,9 +147,9 @@ var HomePage = /** @class */ (function (_super) {
                                 React.createElement("div", { className: "guideGroup__content--wrapper1" },
                                     React.createElement("h1", { className: "guide__title" }, "Excellent Intel Gaming/Streaming Build"),
                                     React.createElement("ul", { className: "guide__keyProducts list-unstyled" },
-                                        React.createElement("li", null, "Intel Core i5-10600K"),
-                                        React.createElement("li", null, "Parametric Video Card (Chipset: GeForce RTX 3070)"),
-                                        React.createElement("li", null, "Corsair 4000D Airflow ATX Mid Tower"))),
+                                        React.createElement("li", null, this.state.TopIntel.processorSku),
+                                        React.createElement("li", null, this.state.TopIntel.vgaSku),
+                                        React.createElement("li", null, this.state.TopIntel.radiatorsSku))),
                                 React.createElement("div", { className: "guideGroup__content--wrapper2" },
                                     React.createElement("div", { className: "guide__numbers" },
                                         React.createElement("p", { className: "guide__price" }, "$1312.54"),
@@ -70,7 +157,7 @@ var HomePage = /** @class */ (function (_super) {
                                             React.createElement("span", { className: "guide__link--comments" },
                                                 React.createElement("svg", { className: "icon shape-comment" },
                                                     React.createElement("use", { xlinkHref: "#shape-comment" })),
-                                                "63"))),
+                                                this.state.TopIntel.rate))),
                                     React.createElement("ul", { className: "guide__images list-unstyled" },
                                         React.createElement("li", { className: "guide__images--1" },
                                             React.createElement("img", { src: "//cdna.pcpartpicker.com/static/forever/images/product/bc6e987da3fe22c616898d1d7fa3d227.256p.jpg" })),
@@ -252,60 +339,26 @@ var HomePage = /** @class */ (function (_super) {
                                 React.createElement("li", { className: "logGroup__action" },
                                     React.createElement("p", null,
                                         React.createElement("a", { href: "/builds/", className: "button" }, "See All Completed Builds")))))),
-                    React.createElement("div", { className: "wrapper wrapper__blogPosts" },
-                        React.createElement("section", { className: "blog-posts xs-col-11 lg-col-9 xl-col-8 xs-mx-auto" },
+                    React.createElement("div", { className: "wrapper wrapper__completedBuilds" },
+                        React.createElement("section", { className: "completed-builds xs-col-11 lg-col-9 xl-col-8 xs-mx-auto" },
                             React.createElement("section", { className: "module-subTitle" },
                                 React.createElement("div", { className: "subTitle" },
                                     React.createElement("div", { className: "subTitle__header" },
-                                        React.createElement("h2", null, "Blog")))),
-                            React.createElement("ul", { className: "blogGrid list-unstyled" },
-                                React.createElement("li", { className: "blogGroup" },
-                                    React.createElement("a", { href: "/blog/163/charity-water-completion-report-13-14-15", className: "blog__image" },
-                                        React.createElement("img", { src: "//cdna.pcpartpicker.com/static/forever/images/content/cefdf8c662bb641f1f699f08540f950b.800.450.jpg" }),
-                                        React.createElement("h1", { className: "blog__title" }, "charity: water Completion Reports #13, #14, #15")),
-                                    React.createElement("p", { className: "meta" },
-                                        "Posted July 8, 2020 by ",
-                                        React.createElement("a", { href: "/user/philip/" }, "philip")),
+                                        React.createElement("h2", null, "Completed Builds")))),
+                            React.createElement("ul", { id: "userbuild_list", className: "logGrid list-unstyled" },
+                                React.createElement("li", { className: "logGroup logGroup__card" },
+                                    React.createElement("a", { href: "/b/yRMcCJ", className: "logGroup__target" }),
+                                    React.createElement("div", { className: "logGroup__content--wrapper1 margin-image-product" },
+                                        React.createElement("a", { href: "/b/yRMcCJ", className: "log__image", style: { backgroundImage: "url(" + "https://lh3.googleusercontent.com/XOyZxluqm-sfyMkT2BGM2eDnUMMmcjPC6xmWynaIIUcPM0w1Y1kFckyedveJ7E37Bia-8Bu4wN6XCeTCmZQ=w500-rw" + ")" } }),
+                                        React.createElement("h1", { className: "log__title title-center" },
+                                            React.createElement("a", { href: "/b/yRMcCJ" }, "AMD Ryzen 5 3600"))),
+                                    React.createElement("div", { className: "none-margin-top-logGroup__content--wrapper2" },
+                                        React.createElement("div", { className: "log__numbers" },
+                                            React.createElement("p", { className: "log__price" }, "$821.93+"),
+                                            React.createElement("p", { className: "log__links" })))),
+                                React.createElement("li", { className: "logGroup__action" },
                                     React.createElement("p", null,
-                                        "Three more ",
-                                        React.createElement("a", { href: "https://charitywater.org" }, "charity: water"),
-                                        " completions report arrived! Thanks to your support, we were able to fund 9 water projects in Uganda, Ethiopia, and Nepal."),
-                                    React.createElement("a", { href: "/blog/163/charity-water-completion-report-13-14-15#comments", className: "blog__link--comments" },
-                                        React.createElement("svg", { className: "icon shape-comment" },
-                                            React.createElement("use", { xlinkHref: "#shape-comment" })),
-                                        "14")),
-                                React.createElement("li", { className: "blogGroup" },
-                                    React.createElement("a", { href: "/blog/162/charity-water-completion-report-12", className: "blog__image" },
-                                        React.createElement("img", { src: "//cdna.pcpartpicker.com/static/forever/images/content/8816657811058a2b0ec9c7caa53ef519.800.450.jpg" }),
-                                        React.createElement("h1", { className: "blog__title" }, "charity: water Completion Report #12")),
-                                    React.createElement("p", { className: "meta" },
-                                        "Posted Dec. 25, 2019 by ",
-                                        React.createElement("a", { href: "/user/philip/" }, "philip")),
-                                    React.createElement("p", null,
-                                        "Our twelfth ",
-                                        React.createElement("a", { href: "https://charitywater.org" }, "charity: water"),
-                                        " completion report arrived! Thanks to your support, we were able to fund 14 water projects in the Maradi Region of Niger serving 6,062 people."),
-                                    React.createElement("a", { href: "/blog/162/charity-water-completion-report-12#comments", className: "blog__link--comments" },
-                                        React.createElement("svg", { className: "icon shape-comment" },
-                                            React.createElement("use", { xlinkHref: "#shape-comment" })),
-                                        "25")),
-                                React.createElement("li", { className: "blogGroup" },
-                                    React.createElement("a", { href: "/blog/161/laptops-added-to-pcpartpicker", className: "blog__image" },
-                                        React.createElement("img", { src: "//cdna.pcpartpicker.com/static/forever/images/content/d595291786238f15449d21458b1f229e.jpg" }),
-                                        React.createElement("h1", { className: "blog__title" }, "Laptops Added to PCPartPicker")),
-                                    React.createElement("p", { className: "meta" },
-                                        "Posted Nov. 22, 2019 by ",
-                                        React.createElement("a", { href: "/user/philip/" }, "philip")),
-                                    React.createElement("p", null,
-                                        "Today we're pleased to announce that PCPartPicker is now listing ",
-                                        React.createElement("a", { href: "/products/laptop/" }, "traditional and 2-in-1 laptops"),
-                                        "."),
-                                    React.createElement("a", { href: "/blog/161/laptops-added-to-pcpartpicker#comments", className: "blog__link--comments" },
-                                        React.createElement("svg", { className: "icon shape-comment" },
-                                            React.createElement("use", { xlinkHref: "#shape-comment" })),
-                                        "49"))),
-                            React.createElement("div", { className: "blog__button" },
-                                React.createElement("a", { href: "/blog/", className: "button button--small" }, "See More Blog Posts"))))))));
+                                        React.createElement("a", { href: "/builds/", className: "button" }, "See All Completed Builds"))))))))));
     };
     return HomePage;
 }(react_1.Component));

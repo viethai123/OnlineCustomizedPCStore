@@ -183,16 +183,6 @@ class CompletedBuild extends Component<any, any> {
 											<li><a href="?page=1" className="pagination--current">1</a></li>
 											<li><a href="?page=2">2</a></li>
 											<li><a href="?page=3">3</a></li>
-											<li>·</li>
-											<li><a href="?page=1000">1000</a></li>
-											<li>·</li>
-											<li><a href="?page=2000">2000</a></li>
-											<li>·</li>
-											<li><a href="?page=3000">3000</a></li>
-											<li>·</li>
-											<li><a href="?page=4000">4000</a></li>
-											<li>·</li>
-											<li><a href="?page=4124">4124</a></li>
 										</ul>
 									</section>
 									{/* End Pagination Module */}

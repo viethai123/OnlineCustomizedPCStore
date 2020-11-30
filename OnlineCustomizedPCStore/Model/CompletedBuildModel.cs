@@ -29,6 +29,8 @@ namespace OnlineCustomizedPCStore.Model
 		public string MouseSku { get; set; }
 		public string HeadphoneSku { get; set; }
 		public string SpeakersSku { get; set; }
+		public int Rate { get; set; }
+		public int Type { get; set; }
 
 		public List<CompletedBuildModel> GetCompletedBuilds()
 		{
@@ -62,7 +64,10 @@ namespace OnlineCustomizedPCStore.Model
 							KeyboardSku = reader.GetString(15),
 							MouseSku = reader.GetString(16),
 							HeadphoneSku = reader.GetString(17),
-							SpeakersSku = reader.GetString(18)
+							SpeakersSku = reader.GetString(18),
+
+							Rate = reader.GetInt32(19),
+							Type = reader.GetInt32(20)
 						};
 						completedBuilds.Add(completedBuild);
 					}

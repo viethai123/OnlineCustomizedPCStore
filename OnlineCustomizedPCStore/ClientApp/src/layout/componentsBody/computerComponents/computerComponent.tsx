@@ -173,11 +173,11 @@ export default class ComputerComponent extends Component<any, any> {
 											{saveComputerComponent.product
 												? saveComputerComponent.product.price
 												: "Error!"}
-											<span className="css-1ul6wk9">đ</span>
+											<span className="css-1ul6wk9"></span>
 										</span>
 										<div className="css-1vptl7o">
 											<span className="css-1lypflo">
-												9.190.000<span className="css-1ul6wk9">đ</span>
+												<span className="css-1ul6wk9"></span>
 											</span>
 										</div>
 									</div>
@@ -204,154 +204,13 @@ export default class ComputerComponent extends Component<any, any> {
 													<div color="#333" className="css-dcbhpa">
 														<div className="css-1oycjaj">
 															<div color="#333" className="css-wsluue"></div>
-															<div color="#333" className="title css-akoccx">
-																Bộ lọc
-															</div>
 														</div>
-														<button
-															className="close-popup"
-															onClick={() => this.ShowPopup()}
-														>
-															x
+														<button type="button" className="close close-popup" aria-label="Close" onClick={() => this.ShowPopup()}>
+															<span aria-hidden="true">&times;</span>
 														</button>
 														<div className="css-bair20"></div>
 													</div>
-													<div className="css-1509jdm">
-														<div className="css-2sxgp5">
-															<div className="dropdown css-7q5kcq">
-																<button
-																	type="button"
-																	className="btn dropdown-toggle css-1v2pmh6"
-																	data-toggle="dropdown"
-																>
-																	Button
-																</button>
-																<div className="dropdown-menu">
-																	<div className="dropdown-item">
-																		<div className="row">
-																			<div className="col">
-																				<ul className="list-group list-group-horizontal-sm">
-																					<li className="list-group-item">
-																						Cras justo odio
-																					</li>
-																					<li className="list-group-item">
-																						Dapibus ac facilisis in
-																					</li>
-																					<li className="list-group-item">
-																						Morbi leo risus
-																					</li>
-																				</ul>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div className="css-2sxgp5">
-															<div className="dropdown css-7q5kcq">
-																<button
-																	type="button"
-																	className="btn dropdown-toggle css-1v2pmh6"
-																	data-toggle="dropdown"
-																>
-																	Button
-																</button>
-																<div className="dropdown-menu">
-																	<div className="dropdown-item">
-																		<div className="row">
-																			<div className="col">
-																				<ul className="list-group list-group-horizontal-sm">
-																					<li className="list-group-item">
-																						Cras justo odio
-																					</li>
-																					<li className="list-group-item">
-																						Dapibus ac facilisis in
-																					</li>
-																					<li className="list-group-item">
-																						Morbi leo risus
-																					</li>
-																				</ul>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div className="css-2sxgp5">
-															<div className="dropdown css-7q5kcq">
-																<button
-																	type="button"
-																	className="btn dropdown-toggle css-1v2pmh6"
-																	data-toggle="dropdown"
-																>
-																	Button
-																</button>
-																<div className="dropdown-menu">
-																	<div className="dropdown-item">
-																		<div className="row">
-																			<div className="col">
-																				<ul className="list-group list-group-horizontal-sm">
-																					<li className="list-group-item">
-																						Cras justo odio
-																					</li>
-																					<li className="list-group-item">
-																						Dapibus ac facilisis in
-																					</li>
-																					<li className="list-group-item">
-																						Morbi leo risus
-																					</li>
-																				</ul>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div className="css-2sxgp5">
-															<div className="dropdown css-7q5kcq">
-																<button
-																	type="button"
-																	className="btn dropdown-toggle css-1v2pmh6"
-																	data-toggle="dropdown"
-																>
-																	Button
-																</button>
-																<div className="dropdown-menu">
-																	<div className="dropdown-item">
-																		<div className="row">
-																			<div className="col">
-																				<ul className="list-group list-group-horizontal-sm">
-																					<li className="list-group-item">
-																						Cras justo odio
-																					</li>
-																					<li className="list-group-item">
-																						Dapibus ac facilisis in
-																					</li>
-																					<li className="list-group-item">
-																						Morbi leo risus
-																					</li>
-																				</ul>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
 													<div className="css-101xial">
-														<div className="css-jusw15">Sắp xếp theo</div>
-														<div className="css-1xy69fm">
-															<div className="css-mau3c4"> </div>
-															<span className="css-f2ehsn">Nổi bật nhất</span>
-														</div>
-														<div className="css-1xy69fm">
-															<div className="css-mau3c4"> </div>
-															<span className="css-f2ehsn">Giá tăng dần</span>
-														</div>
-														<div className="css-1xy69fm">
-															<div className="css-mau3c4"> </div>
-															<span className="css-f2ehsn">Giá giảm dần</span>
-														</div>
 														<input
 															placeholder="Tìm linh kiện"
 															className="css-p6sluc"

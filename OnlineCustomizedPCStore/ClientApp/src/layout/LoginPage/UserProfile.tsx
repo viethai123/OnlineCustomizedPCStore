@@ -21,7 +21,7 @@ const UserProfile = (props : any) => {
                 aria-expanded={dropdownOpen}
             >
                 {
-                    user ? user : null
+                    user ? "Hello, " + user : null
                 }
       </DropdownToggle>
             <DropdownMenu>

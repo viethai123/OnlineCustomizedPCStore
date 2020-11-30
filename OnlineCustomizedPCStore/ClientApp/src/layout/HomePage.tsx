@@ -5,11 +5,53 @@ export default class HomePage extends Component<any, any> {
 	constructor(props: any) {
 		super(props);
 		this.state = {
-
+			TopAMD: {
+			},
+			TopIntel: {
+			},
+			CompletedBuilds: []
 		};
 	}
 
+	async componentDidMount() {
+		debugger
+		await fetch('api/CompletedBuild/ListOfCompletedBuild')
+			.then(response => response.json())
+			.then(data => {
+				this.setState({
+					CompletedBuilds: data,
+				});
+				console.log(this.state.CompletedBuilds)
+				var AMD2 = 0;
+				var Intel2 = 0;
+				data.forEach((item: any) => {
+					var TopAMD = this.state.TopAMD;
+					var TopIntel = this.state.TopIntel;
+					debugger
+					if (item.type === 1) {
+						var AMD = item.rate;
+						if (AMD > AMD2) {
+							AMD2 = AMD;
+							TopAMD = item;
+							this.setState({ TopAMD: TopAMD })
+						}
+					}
+
+					if (item.type === 2) {
+						var Intel = item.rate;
+						if (Intel > Intel2) {
+							Intel2 = Intel;
+							TopIntel = item;
+							this.setState({ TopIntel: TopIntel })
+						}
+					}
+				})
+			});
+	}
+
 	render() {
+		console.log(this.state.TopAMD);
+		console.log(this.state.TopIntel);
 		return (
 			<div className={this.props.themeMode ? "dark-mode" : "light-mode"}>
 				<section className="main-wrapper xs-col-12">
@@ -26,9 +68,9 @@ export default class HomePage extends Component<any, any> {
 									<div className="guideGroup__content--wrapper1">
 										<h1 className="guide__title">Entry Level AMD Gaming Build</h1>
 										<ul className="guide__keyProducts list-unstyled">
-											<li>AMD Ryzen 5 2600</li>
-											<li>Parametric Video Card (Chipset: GeForce GTX 1650 SUPER)</li>
-											<li>Cougar MX330 ATX Mid Tower</li>
+											<li>{this.state.TopAMD.processorSku}</li>
+											<li>{this.state.TopAMD.vgaSku}</li>
+											<li>{this.state.TopAMD.radiatorsSku}</li>
 										</ul>
 									</div>
 									<div className="guideGroup__content--wrapper2">
@@ -36,7 +78,7 @@ export default class HomePage extends Component<any, any> {
 											<p className="guide__price">
 												$582.93
                     </p>
-											<p className="guide__links"><span className="guide__link--comments"><svg className="icon shape-comment"><use xlinkHref="#shape-comment" /></svg>189</span></p>
+											<p className="guide__links"><span className="guide__link--comments"><svg className="icon shape-comment"><use xlinkHref="#shape-comment" /></svg>{this.state.TopAMD.rate}</span></p>
 										</div>
 										<ul className="guide__images list-unstyled">
 											<li className="guide__images--1"><img src="https://images-na.ssl-images-amazon.com/images/I/51N2BQA3cBL.jpg" /></li>
@@ -50,9 +92,9 @@ export default class HomePage extends Component<any, any> {
 									<div className="guideGroup__content--wrapper1">
 										<h1 className="guide__title">Excellent Intel Gaming/Streaming Build</h1>
 										<ul className="guide__keyProducts list-unstyled">
-											<li>Intel Core i5-10600K</li>
-											<li>Parametric Video Card (Chipset: GeForce RTX 3070)</li>
-											<li>Corsair 4000D Airflow ATX Mid Tower</li>
+											<li>{this.state.TopIntel.processorSku}</li>
+											<li>{this.state.TopIntel.vgaSku}</li>
+											<li>{this.state.TopIntel.radiatorsSku}</li>
 										</ul>
 									</div>
 									<div className="guideGroup__content--wrapper2">
@@ -60,7 +102,7 @@ export default class HomePage extends Component<any, any> {
 											<p className="guide__price">
 												$1312.54
                     </p>
-											<p className="guide__links"><span className="guide__link--comments"><svg className="icon shape-comment"><use xlinkHref="#shape-comment" /></svg>63</span></p>
+											<p className="guide__links"><span className="guide__link--comments"><svg className="icon shape-comment"><use xlinkHref="#shape-comment" /></svg>{this.state.TopIntel.rate}</span></p>
 										</div>
 										<ul className="guide__images list-unstyled">
 											<li className="guide__images--1"><img src="//cdna.pcpartpicker.com/static/forever/images/product/bc6e987da3fe22c616898d1d7fa3d227.256p.jpg" /></li>
@@ -248,45 +290,36 @@ export default class HomePage extends Component<any, any> {
 								</ul>
 							</section>
 						</div>
-						<div className="wrapper wrapper__blogPosts">
-							<section className="blog-posts xs-col-11 lg-col-9 xl-col-8 xs-mx-auto">
+						<div className="wrapper wrapper__completedBuilds">
+							<section className="completed-builds xs-col-11 lg-col-9 xl-col-8 xs-mx-auto">
 								<section className="module-subTitle">
 									<div className="subTitle">
 										<div className="subTitle__header">
-											<h2>Blog</h2>
+											<h2>Completed Builds</h2>
 										</div>
 									</div>
 								</section>
-								<ul className="blogGrid list-unstyled">
-									<li className="blogGroup">
-										<a href="/blog/163/charity-water-completion-report-13-14-15" className="blog__image">
-											<img src="//cdna.pcpartpicker.com/static/forever/images/content/cefdf8c662bb641f1f699f08540f950b.800.450.jpg" />
-											<h1 className="blog__title">charity: water Completion Reports #13, #14, #15</h1>
-										</a>
-										<p className="meta">Posted July 8, 2020 by <a href="/user/philip/">philip</a></p>
-										<p>Three more <a href="https://charitywater.org">charity: water</a> completions report arrived! Thanks to your support, we were able to fund 9 water projects in Uganda, Ethiopia, and Nepal.</p>
-										<a href="/blog/163/charity-water-completion-report-13-14-15#comments" className="blog__link--comments"><svg className="icon shape-comment"><use xlinkHref="#shape-comment" /></svg>14</a>
+								<ul id="userbuild_list" className="logGrid list-unstyled">
+									<li className="logGroup logGroup__card">
+										<a href="/b/yRMcCJ" className="logGroup__target" />
+										<div className="logGroup__content--wrapper1 margin-image-product">
+											<a href="/b/yRMcCJ" className="log__image" style={{ backgroundImage: `url(${"https://lh3.googleusercontent.com/XOyZxluqm-sfyMkT2BGM2eDnUMMmcjPC6xmWynaIIUcPM0w1Y1kFckyedveJ7E37Bia-8Bu4wN6XCeTCmZQ=w500-rw"})` }} />
+											<h1 className="log__title title-center"><a href="/b/yRMcCJ">AMD Ryzen 5 3600</a></h1>
+										</div>
+										<div className="none-margin-top-logGroup__content--wrapper2">
+											<div className="log__numbers">
+												<p className="log__price">$821.93+</p>
+												<p className="log__links">
+												</p>
+											</div>
+										</div>
 									</li>
-									<li className="blogGroup">
-										<a href="/blog/162/charity-water-completion-report-12" className="blog__image">
-											<img src="//cdna.pcpartpicker.com/static/forever/images/content/8816657811058a2b0ec9c7caa53ef519.800.450.jpg" />
-											<h1 className="blog__title">charity: water Completion Report #12</h1>
-										</a>
-										<p className="meta">Posted Dec. 25, 2019 by <a href="/user/philip/">philip</a></p>
-										<p>Our twelfth <a href="https://charitywater.org">charity: water</a> completion report arrived! Thanks to your support, we were able to fund 14 water projects in the Maradi Region of Niger serving 6,062 people.</p>
-										<a href="/blog/162/charity-water-completion-report-12#comments" className="blog__link--comments"><svg className="icon shape-comment"><use xlinkHref="#shape-comment" /></svg>25</a>
-									</li>
-									<li className="blogGroup">
-										<a href="/blog/161/laptops-added-to-pcpartpicker" className="blog__image">
-											<img src="//cdna.pcpartpicker.com/static/forever/images/content/d595291786238f15449d21458b1f229e.jpg" />
-											<h1 className="blog__title">Laptops Added to PCPartPicker</h1>
-										</a>
-										<p className="meta">Posted Nov. 22, 2019 by <a href="/user/philip/">philip</a></p>
-										<p>Today we're pleased to announce that PCPartPicker is now listing <a href="/products/laptop/">traditional and 2-in-1 laptops</a>.</p>
-										<a href="/blog/161/laptops-added-to-pcpartpicker#comments" className="blog__link--comments"><svg className="icon shape-comment"><use xlinkHref="#shape-comment" /></svg>49</a>
+									<li className="logGroup__action">
+										<p>
+											<a href="/builds/" className="button">See All Completed Builds</a>
+										</p>
 									</li>
 								</ul>
-								<div className="blog__button"><a href="/blog/" className="button button--small">See More Blog Posts</a></div>
 							</section>
 						</div>
 					</div>
