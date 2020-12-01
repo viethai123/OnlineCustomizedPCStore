@@ -14,6 +14,7 @@ import AuthApi from './layout/LoginPage/AuthApi'
 import HomePage from './layout/HomePage';
 import '../src/script.js';
 import CompletedBuild from './layout/CompletedBuildComponent/CompletedBuild';
+import BrowseProducts from './layout/BrowseProductsComponent/BrowseProducts';
 class App extends Component {
 	static displayName = App.name;
 	constructor(props) {
@@ -120,6 +121,7 @@ class App extends Component {
 					<Route path="/homepage" render={props =>
 						(<HomePage {...props} themeMode={this.state.themeMode} />)
 						} />
+					<Route path='/browseProducts' component={BrowseProducts} />
 					<Route path='/counter' component={Counter} />
 					<Route path='/fetch-data' component={FetchData} />
 					<Route path='/completed-build' component={CompletedBuild} />

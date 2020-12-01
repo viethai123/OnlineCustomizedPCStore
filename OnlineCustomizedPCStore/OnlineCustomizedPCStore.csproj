@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\layout\BrowseProductsComponent\BrowseProducts.tsx" />
     <None Remove="ClientApp\src\layout\CompletedBuildComponent\BuildComponent.tsx" />
     <None Remove="ClientApp\src\layout\CompletedBuildComponent\CompletedBuild.tsx" />
     <None Remove="ClientApp\src\layout\HomePage.tsx" />
@@ -57,7 +58,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\layout\BrowseProductsComponent\" />
+    <TypeScriptCompile Update="ClientApp\src\layout\BrowseProductsComponent\BrowseProducts.tsx">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -6,149 +6,99 @@ class Footer extends Component<any, any> {
     super(props);
     this.state = {};
   }
-  render() {
+    render() {
     return (
-      <div className="footer">
-        <footer className="pt-4 bg-dark text-light">
-          <div className="container text-center text-md-left">
-            <div className="row">
-              <div className="col-md-4 mx-auto">
-                <h5 className="font-weight-bold text-uppercase mt-3 mb-4">
-                  Footer Content
-                </h5>
-                <p>
-                  Here you can use rows and columns to organize your footer
-                  content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                  elit.
-                </p>
-              </div>
-
-              <hr className="clearfix w-100 d-md-none"></hr>
-
-              <div className="col-md-2 mx-auto">
-                <h5 className="font-weight-bold text-uppercase mt-3 mb-4">
-                  Links
-                </h5>
-
-                <ul className="list-unstyled">
-                  <li>
-                    <a href="#!">Link 1</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 2</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 3</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 4</a>
-                  </li>
-                </ul>
-              </div>
-
-              <hr className="clearfix w-100 d-md-none"></hr>
-
-              <div className="col-md-2 mx-auto">
-                <h5 className="font-weight-bold text-uppercase mt-3 mb-4">
-                  Links
-                </h5>
-
-                <ul className="list-unstyled">
-                  <li>
-                    <a href="#!">Link 1</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 2</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 3</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 4</a>
-                  </li>
-                </ul>
-              </div>
-
-              <hr className="clearfix w-100 d-md-none"></hr>
-
-              <div className="col-md-2 mx-auto">
-                <h5 className="font-weight-bold text-uppercase mt-3 mb-4">
-                  Links
-                </h5>
-
-                <ul className="list-unstyled">
-                  <li>
-                    <a href="#!">Link 1</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 2</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 3</a>
-                  </li>
-                  <li>
-                    <a href="#!">Link 4</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <hr></hr>
-
-          {/* <!-- Call to action --> */}
-          <ul className="list-unstyled list-inline text-center py-2">
-            <li className="list-inline-item">
-              <h5 className="mb-1">Register for free</h5>
-            </li>
-            <li className="list-inline-item">
-              <a href="#!" className="btn btn-danger btn-rounded">
-                Sign up!
-              </a>
-            </li>
-          </ul>
-          {/* <!-- Call to action --> */}
-
-          <hr></hr>
-
-          {/* <!-- Social buttons --> */}
-          <ul className="list-unstyled list-inline text-center">
-            <li className="list-inline-item">
-              <a href="#section" className="btn-floating btn-fb mx-1">
-                <i className="fab fa-facebook-f"> </i>
-              </a>
-            </li>
-            <li className="list-inline-item">
-              <a href="#section" className="btn-floating btn-tw mx-1">
-                <i className="fab fa-twitter"> </i>
-              </a>
-            </li>
-            <li className="list-inline-item">
-              <a href="#section" className="btn-floating btn-gplus mx-1">
-                <i className="fab fa-google-plus-g"> </i>
-              </a>
-            </li>
-            <li className="list-inline-item">
-              <a href="#section" className="btn-floating btn-li mx-1">
-                <i className="fab fa-linkedin-in"> </i>
-              </a>
-            </li>
-            <li className="list-inline-item">
-              <a href="#section" className="btn-floating btn-dribbble mx-1">
-                <i className="fab fa-dribbble"> </i>
-              </a>
-            </li>
-          </ul>
-          {/* <!-- Social buttons --> */}
-
-          {/* <!-- Copyright --> */}
-          <div className="footer-copyright text-center py-3">
-            © 2020 Copyright:
-            <a href="https://mdbootstrap.com/"> laptop store 4.0</a>
-          </div>
-          {/* <!-- Copyright --> */}
+        <footer className="clearfix footer--display">
+            <nav className="xs-col-11 lg-col-9 xl-col-8 xs-mx-auto">
+                <div className="clearfix">
+                    <div className="col xs-col-12 sm-col-3">
+                        <div className="footer__logo">
+                            <a className="color-logo navbar-brand" href="/homepage">OnlineCustomizedPCStore</a>
+                            <h1>
+                                <ul>
+                                    <li className="footer__headline-one">Pick Parts.</li>
+                                    <li className="footer__headline-two">Build Your PC.</li>
+                                    <li className="footer__headline-three">Compare And Share.</li>
+                                </ul>
+                            </h1>
+                        </div>
+                    </div>
+                    <div className="col xs-col-12 sm-col-3">
+                        <h2>Categories</h2>
+                        <ul className="footer__main-nav">
+                            <li><a href="/list/">System Builds</a></li>
+                            <li><a href="/guide/">Build Guides</a></li>
+                            <li><a href="/builds/">Completed Builds</a></li>
+                            <li><a href="/products/">Browse Products</a></li>
+                        </ul>
+                    </div>
+                    <div className="col xs-col-12 sm-col-3">
+                        <h2>Information</h2>
+                        <ul className="footer__secondary-nav">
+                            <li><a href="/blog/">Blog</a></li>
+                            <li><a href="/downloads/">Downloads</a></li>
+                            <li><a href="/forums/">Forums</a></li>
+                            <li><a href="/products/pricedrop/">Price Drops</a></li>
+                            <li><a href="/trends/">Price Trends</a></li>
+                        </ul>
+                    </div>
+                    <div className="col xs-col-12 sm-col-3">
+                        <h2>Company</h2>
+                        <ul className="footer__secondary-nav">
+                            <li><a href="/about/">About</a></li>
+                            <li><a href="/contact/">Contact &amp; Imprint</a></li>
+                            <li><a href="/tos/">Terms of Service</a></li>
+                            <li><a href="/code-of-conduct/">User Code of Conduct</a></li>
+                            <li><a href="/code-of-conduct/industry-affiliate/">Industry Code of Conduct</a></li>
+                            <li><a href="/privacy/">Privacy Policy</a></li>
+                            <li><a href="/do-not-sell-my-personal-information/">Do Not Sell My Personal Information</a></li>
+                            <li><a href="/disclosure/">Affiliate Disclosure</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="clearfix">
+                    <div className="col xs-col-12">
+                        <ul className="footer__social">
+                            <li><a href="https://www.facebook.com/pcpartpicker/">
+                                <svg className="icon shape-facebook">
+                                    <use xlinkHref="#shape-facebook" />
+                                </svg></a>
+                            </li>
+                            <li><a href="https://www.instagram.com/pcpartpicker/">
+                                <svg className="icon shape-instagram">
+                                    <use xlinkHref="#shape-instagram" />
+                                </svg></a>
+                            </li>
+                            <li><a href="http://discord.gg/pcpartpicker">
+                                <svg className="icon shape-discord">
+                                    <use xlinkHref="#shape-discord" />
+                                </svg></a>
+                            </li>
+                            <li><a href="https://www.twitter.com/pcpartpicker/">
+                                <svg className="icon shape-twitter">
+                                    <use xlinkHref="#shape-twitter" />
+                                </svg></a>
+                            </li>
+                            <li><a href="https://www.twitch.tv/pcpartpicker">
+                                <svg className="icon shape-twitch">
+                                    <use xlinkHref="#shape-twitch" />
+                                </svg></a>
+                            </li>
+                            <li><a href="https://www.youtube.com/pcpartpicker/">
+                                <svg className="icon shape-search">
+                                    <use xlinkHref="#shape-youtube" />
+                                </svg></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="xs-col-12">
+                        <p className="footer__copyright">
+                            ©2020 OnlineCustomizedPCStore, LLC. All rights reserved.
+              </p>
+                    </div>
+                </div>
+            </nav>
         </footer>
-      </div>
     );
   }
 }

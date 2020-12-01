@@ -190,6 +190,8 @@ var Body = /** @class */ (function (_super) {
                     });
                 }
             }
+            // console.log(item);
+            // console.log(this.state.ComputerComponent);
         };
         _this.DeleteProduct = function (item, key) {
             var saveComputerComponent = _this.state.saveComputerComponent;
@@ -445,6 +447,9 @@ var Body = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         debugger;
+                        console.log("Loginnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+                        console.log(this.props.loggedInStatus);
+                        console.log(this.props.user);
                         UserId = this.props.loggedInStatus == 'LOGGED_IN' ? this.props.user[0].id : this.state.UserId;
                         return [4 /*yield*/, fetch('api/ComputerComponent/GetUserOptions?UserId=' + UserId)
                                 .then(function (response) { return response.json(); })

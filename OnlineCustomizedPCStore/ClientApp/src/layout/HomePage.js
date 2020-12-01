@@ -108,8 +108,6 @@ var HomePage = /** @class */ (function (_super) {
         });
     };
     HomePage.prototype.render = function () {
-        console.log(this.state.TopAMD);
-        console.log(this.state.TopIntel);
         return (React.createElement("div", { className: this.props.themeMode ? "dark-mode" : "light-mode" },
             React.createElement("section", { className: "main-wrapper xs-col-12" },
                 React.createElement("div", { id: "homepage" },
@@ -358,7 +356,7 @@ var HomePage = /** @class */ (function (_super) {
                                             React.createElement("p", { className: "log__links" })))),
                                 React.createElement("li", { className: "logGroup__action" },
                                     React.createElement("p", null,
-                                        React.createElement("a", { href: "/builds/", className: "button" }, "See All Completed Builds"))))))))));
+                                        React.createElement("a", { href: "/completed-build", className: "button" }, "See All Completed Builds"))))))))));
     };
     return HomePage;
 }(react_1.Component));

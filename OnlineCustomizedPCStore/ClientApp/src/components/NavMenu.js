@@ -26,9 +26,11 @@ export class NavMenu extends Component {
 	}
 
 	toggleNavbar() {
+		var collapsed = this.state.collapsed;
 		this.setState({
-			collapsed: !this.state.collapsed
+			collapsed: !collapsed
 		});
+		console.log(collapsed);
 	}
 
 	handleLogOutClick() {
@@ -170,11 +172,26 @@ export class NavMenu extends Component {
 										<li className="nav__categories--builds">
 											<NavLink tag={Link} to="/completed-build"><svg className="nav__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 24"><g data-name="Layer 2"><g data-name="Layer 1"><path d="M19.08 1l-12-1H7a.62.62 0 0 0-.19 0h-.14l-.09.1-.13.07-.13.09L.45 4.17A1 1 0 0 0 0 5v17a1 1 0 0 0 .84 1l6 1H19a1 1 0 0 0 1-1V2a1 1 0 0 0-.92-1zM6 21.82l-4-.67V5.54l4-2.67zM18 22H8V2.09l10 .83z" /><circle cx={13} cy={18} r={1} /><path d="M17 4.6L9 4v2l8 .6v-2zM17 7.6L9 7v2l8 .6v-2z" /></g></g></svg>Completed Builds</NavLink>
 										</li>
-										<li className="nav__categories--browseProducts js-trigger--browseProducts"><a href="#" className=""><svg className="nav__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="Layer 1"><path d="M8 8h8v8H8z" /><path d="M24 9V7h-2V4a2 2 0 0 0-2-2h-3V0h-2v2h-2V0h-2v2H9V0H7v2H4a2 2 0 0 0-2 2v3H0v2h2v2H0v2h2v2H0v2h2v3a2 2 0 0 0 2 2h3v2h2v-2h2v2h2v-2h2v2h2v-2h3a2 2 0 0 0 2-2v-3h2v-2h-2v-2h2v-2h-2V9zm-4 11H4V4h16z" /></g></g></svg>Browse Products<span className="down-caret"><svg className="icon shape-dropdown-arrow"><use xlinkHref="#shape-dropdown-arrow" /></svg></span></a>
+										<li className="nav__categories--browseProducts js-trigger--browseProducts">
+											<NavLink tag={Link} to="/browseProducts">
+												<svg className="nav__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+													<g data-name="Layer 2">
+														<g data-name="Layer 1">
+															<path d="M8 8h8v8H8z" />
+															<path d="M24 9V7h-2V4a2 2 0 0 0-2-2h-3V0h-2v2h-2V0h-2v2H9V0H7v2H4a2 2 0 0 0-2 2v3H0v2h2v2H0v2h2v2H0v2h2v3a2 2 0 0 0 2 2h3v2h2v-2h2v2h2v-2h2v2h2v-2h3a2 2 0 0 0 2-2v-3h2v-2h-2v-2h2v-2h-2V9zm-4 11H4V4h16z" />
+														</g>
+													</g>
+												</svg>Browse Products
+												<span className="down-caret" onClick={this.toggleNavbar}>
+													<svg className="icon shape-dropdown-arrow">
+														<use xlinkHref="#shape-dropdown-arrow" />
+													</svg>
+												</span>
+											</NavLink>
 										</li>
 										<li className="nav__subLinks"><div className="nav__subLinks--group1"><a href="/cart" className="nav__categories--drops">Cart</a><a href="/forums/" className="nav__categories--forums">Forums</a></div><div className="nav__subLinks--group2"><a href="/trends/" className="nav__categories--trends">Price Trends</a><a href="/blog/" className="nav__categories--blog">Blog</a></div></li>
 										<li>
-											<div className="browseProducts browseProducts--hide">
+											<div className={this.state.collapsed ? "browseProducts browseProducts--hide" : "browseProducts"}>
 												<div className="browseProducts__wrapper xs-col-11 xs-mx-auto">
 													<div className="browseProducts__block--group1">
 														<ul className="browseProducts__block--popular list-unstyled">
@@ -187,62 +204,6 @@ export class NavMenu extends Component {
 															<li><a href="/products/power-supply/"><img src="//cdna.pcpartpicker.com/static/forever/img/nav-powersupply.png" alt="Power Supply" />Power Supply</a></li>
 															<li><a href="/products/case/"><img src="//cdna.pcpartpicker.com/static/forever/img/nav-case.png" alt="Case" />Case</a></li>
 														</ul>
-													</div>
-													<div className="browseProducts__block--group2">
-														<div className="browseProducts__col1">
-															<ul className="browseProducts__block--cooling list-unstyled">
-																<li><h2>Cooling</h2></li>
-																<li><a href="/products/case-fan/">Case Fans</a></li>
-																<li><a href="/products/fan-controller/">Fan Controllers</a></li>
-																<li><a href="/products/thermal-paste/">Thermal Compound</a></li>
-															</ul>
-															<ul className="browseProducts__block--drives list-unstyled">
-																<li><h2>Drives</h2></li>
-																<li><a href="/products/optical-drive/">Optical Drives</a></li>
-															</ul>
-															<ul className="browseProducts__block--expansion list-unstyled">
-																<li><h2>Expansion</h2></li>
-																<li><a href="/products/sound-card/">Sound Cards</a></li>
-																<li><a href="/products/wired-network-card/">Wired Networking</a></li>
-																<li><a href="/products/wireless-network-card/">Wireless Networking</a></li>
-															</ul>
-														</div>
-														<div className="browseProducts__col2">
-															<ul className="browseProducts__block--displays list-unstyled">
-																<li><h2>Displays</h2></li>
-																<li><a href="/products/monitor/">Monitors</a></li>
-															</ul>
-															<ul className="browseProducts__block--externalStorage list-unstyled">
-																<li><h2>External Storage</h2></li>
-																<li><a href="/products/external-hard-drive/">External Hard Drives</a></li>
-															</ul>
-															<ul className="browseProducts__block--peripherals list-unstyled">
-																<li><h2>Peripherals</h2></li>
-																<li><a href="/products/headphones/">Headphones</a></li>
-																<li><a href="/products/keyboard/">Keyboards</a></li>
-																<li><a href="/products/mouse/">Mice</a></li>
-																<li><a href="/products/speakers/">Speakers</a></li>
-																<li><a href="/products/ups/">Uninterruptible Power Supplies</a></li>
-																<li><a href="/products/webcam/">Webcams</a></li>
-															</ul>
-														</div>
-														<div className="browseProducts__col3">
-															<ul className="browseProducts__block--software list-unstyled">
-																<li><h2>Software</h2></li>
-																<li><a href="/products/software/#W=1">Antivirus</a></li>
-																<li><a href="/products/software/#W=8">Audio &amp; Video</a></li>
-																<li><a href="/products/software/#W=2">Backup</a></li>
-																<li><a href="/products/software/#W=3">Design &amp; Illustration</a></li>
-																<li><a href="/products/software/#W=5">Internet Security</a></li>
-																<li><a href="/products/software/#W=7">Office &amp; Productivity</a></li>
-																<li><a href="/products/os/">Operating Systems</a></li>
-																<li><a href="/products/software/#W=6">Photography</a></li>
-															</ul>
-															<ul className="browseProducts__block--software list-unstyled">
-																<li><h2>Other</h2></li>
-																<li><a href="/products/laptop/">Laptops</a></li>
-															</ul>
-														</div>
 													</div>
 												</div>
 											</div>

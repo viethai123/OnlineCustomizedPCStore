@@ -14669,6 +14669,7 @@ dl dd {
 .table .tr, .table tr, table .tr, table tr {
 	border-top-style: solid;
 	border-top-width: 1px;
+	border-color: #dbdbdb;
 }
 
 .light-mode .table .tr, .light-mode .table tr, .light-mode table .tr, .light-mode table tr {

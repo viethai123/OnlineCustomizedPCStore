@@ -50,8 +50,6 @@ export default class HomePage extends Component<any, any> {
 	}
 
 	render() {
-		console.log(this.state.TopAMD);
-		console.log(this.state.TopIntel);
 		return (
 			<div className={this.props.themeMode ? "dark-mode" : "light-mode"}>
 				<section className="main-wrapper xs-col-12">
@@ -316,7 +314,7 @@ export default class HomePage extends Component<any, any> {
 									</li>
 									<li className="logGroup__action">
 										<p>
-											<a href="/builds/" className="button">See All Completed Builds</a>
+											<a href="/completed-build" className="button">See All Completed Builds</a>
 										</p>
 									</li>
 								</ul>
