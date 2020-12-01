@@ -93,7 +93,7 @@ export class NavMenu extends Component {
 									<ul className="nav__account nav__account--desktop list-unstyled">
 										<li className="nav__account--login">{this.props.loggedInStatus == "NOT_LOGGED_IN" && this.state.user == null ?
 											<NavItem>
-												<NavLink tag={Link} className="text-light" to="/LoginPage">User Log In</NavLink>
+												<NavLink tag={Link} className="text-light" to="/login">User Log In</NavLink>
 											</NavItem> :
 											<NavItem>
 												<NavLink className="text-light">

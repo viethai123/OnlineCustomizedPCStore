@@ -58,8 +58,10 @@ var LogInContent = /** @class */ (function (_super) {
     function LogInContent(props) {
         var _this = _super.call(this, props) || this;
         _this.isActive = function () {
+            var isActive = _this.state.isActive;
+            var closeSignIn = _this.state.closeSignIn;
             _this.setState({
-                isActive: true, closeSignIn: false
+                isActive: !isActive, closeSignIn: !closeSignIn
             });
         };
         _this.state = {
@@ -261,13 +263,13 @@ var LogInContent = /** @class */ (function (_super) {
                                     React.createElement("i", { className: "fa fa-user", "aria-hidden": "true" })),
                                 React.createElement("div", null,
                                     React.createElement("h5", null, "Username"),
-                                    React.createElement("input", { className: "u-input", type: "text", name: "username", onChange: this.handleChange }))),
+                                    React.createElement("input", { className: "box-none u-input", type: "text", name: "username", onChange: this.handleChange }))),
                             React.createElement("div", { className: inputtwo, onClick: function () { return _this.focus2(); } },
                                 React.createElement("div", { className: "i" },
                                     React.createElement("i", { className: "fa fa-lock", "aria-hidden": "true" })),
                                 React.createElement("div", null,
                                     React.createElement("h5", null, "Password"),
-                                    React.createElement("input", { className: "u-input", type: "password", name: "password", onChange: this.handleChange }))),
+                                    React.createElement("input", { className: "box-none u-input", type: "password", name: "password", onChange: this.handleChange }))),
                             React.createElement("button", { className: "login-a", onClick: function () { return _this.isActive(); } }, "Register an account"),
                             React.createElement("input", { type: "submit", className: "login-btn", value: "Login", onClick: function () { _this.userLogIn(); } })))) : null,
             this.state.isActive ?
@@ -282,27 +284,28 @@ var LogInContent = /** @class */ (function (_super) {
                                             React.createElement("i", { className: "fa fa-user", "aria-hidden": "true" })),
                                         React.createElement("div", null,
                                             React.createElement("h5", null, "Full name"),
-                                            React.createElement("input", { className: "u-input", type: "text", name: "userFullName", value: this.state.userFullName, onChange: this.handleChange, required: true }))),
+                                            React.createElement("input", { className: "box-none u-input", type: "text", name: "userFullName", value: this.state.userFullName, onChange: this.handleChange, required: true }))),
                                     React.createElement("div", { className: input2, onClick: function () { return _this.focus4(); } },
                                         React.createElement("div", { className: "i" },
                                             React.createElement("i", { className: "fa fa-lock", "aria-hidden": "true" })),
                                         React.createElement("div", null,
                                             React.createElement("h5", null, "Username"),
-                                            React.createElement("input", { className: "u-input", type: "text", onChange: this.handleChange, name: "usersign", value: this.state.usersign, required: true }))),
+                                            React.createElement("input", { className: "box-none u-input", type: "text", onChange: this.handleChange, name: "usersign", value: this.state.usersign, required: true }))),
                                     React.createElement("button", { className: "check-btn", type: "submit", onClick: function () { return _this.checkUserName(); } }, "Check UserName"),
                                     React.createElement("div", { className: input3, onClick: function () { return _this.focus5(); } },
                                         React.createElement("div", { className: "i" },
                                             React.createElement("i", { className: "fa fa-lock", "aria-hidden": "true" })),
                                         React.createElement("div", null,
                                             React.createElement("h5", null, "Password"),
-                                            React.createElement("input", { className: "u-input", type: "text", name: "passsign", value: this.state.passsign, onChange: this.handleChange, required: true }))),
+                                            React.createElement("input", { className: "box-none u-input", type: "text", name: "passsign", value: this.state.passsign, onChange: this.handleChange, required: true }))),
                                     React.createElement("div", { className: input4, onClick: function () { return _this.focus6(); } },
                                         React.createElement("div", { className: "i" },
                                             React.createElement("i", { className: "fa fa-lock", "aria-hidden": "true" })),
                                         React.createElement("div", null,
                                             React.createElement("h5", null, "Email Address"),
-                                            React.createElement("input", { className: "u-input", onChange: this.handleChange, type: "text", name: "userEmail", value: this.state.userEmail, required: true }))),
-                                    React.createElement("button", { type: "submit", className: "login-btn", onClick: this.userSignUp }, "Sign up")))))) : null));
+                                            React.createElement("input", { className: "box-none u-input", onChange: this.handleChange, type: "text", name: "userEmail", value: this.state.userEmail, required: true }))),
+                                    React.createElement("button", { type: "submit", className: "login-btn", onClick: this.userSignUp }, "Sign up"),
+                                    React.createElement("button", { type: "submit", className: "login-btn", onClick: function () { return _this.isActive(); } }, "Sign in")))))) : null));
     };
     return LogInContent;
 }(react_1.Component));

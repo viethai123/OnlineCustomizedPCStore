@@ -38,8 +38,10 @@ class LogInContent extends Component<any, any>{
     }
 
     public isActive = () => {
+        var isActive = this.state.isActive;
+        var closeSignIn = this.state.closeSignIn;
         this.setState({
-            isActive: true, closeSignIn: false
+            isActive: !isActive, closeSignIn: !closeSignIn
         })
     }
 
@@ -194,7 +196,7 @@ class LogInContent extends Component<any, any>{
                                     <div>
                                         <h5>Username</h5>
                                         <input
-                                            className="u-input"
+                                            className="box-none u-input"
                                             type="text"
                                             name="username"
                                             onChange={this.handleChange}
@@ -208,7 +210,7 @@ class LogInContent extends Component<any, any>{
                                     <div>
                                         <h5>Password</h5>
                                         <input
-                                            className="u-input"
+                                            className="box-none u-input"
                                             type="password"
                                             name="password"
                                             onChange={this.handleChange}
@@ -235,7 +237,7 @@ class LogInContent extends Component<any, any>{
                                             <div>
                                                 <h5>Full name</h5>
                                                 <input
-                                                    className="u-input"
+                                                    className="box-none u-input"
                                                     type="text"
                                                     name="userFullName"
                                                     value={this.state.userFullName}
@@ -251,7 +253,7 @@ class LogInContent extends Component<any, any>{
                                             <div>
                                                 <h5>Username</h5>
                                                 <input
-                                                    className="u-input"
+                                                    className="box-none u-input"
                                                     type="text"
                                                     onChange={this.handleChange}
                                                     name="usersign"
@@ -269,7 +271,7 @@ class LogInContent extends Component<any, any>{
                                             <div>
                                                 <h5>Password</h5>
                                                 <input
-                                                    className="u-input"
+                                                    className="box-none u-input"
                                                     type="text"
                                                     name="passsign"
                                                     value={this.state.passsign}
@@ -285,7 +287,7 @@ class LogInContent extends Component<any, any>{
                                             <div>
                                                 <h5>Email Address</h5>
                                                 <input
-                                                    className="u-input"
+                                                    className="box-none u-input"
                                                     onChange={this.handleChange}
                                                     type="text"
                                                     name="userEmail"
@@ -295,6 +297,7 @@ class LogInContent extends Component<any, any>{
                                             </div>
                                         </div>
                                         <button type="submit" className="login-btn" onClick={this.userSignUp}>Sign up</button>
+                                        <button type="submit" className="login-btn" onClick={() => this.isActive()}>Sign in</button>
                                     </form>
                                 </div>
                             </div>
