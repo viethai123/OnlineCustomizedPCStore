@@ -273,7 +273,7 @@ export default class Body extends Component<any, any> {
 		debugger
 		console.log("Loginnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
 		console.log(this.props.loggedInStatus);
-		console.log(this.props.user)
+		console.log(this.props.user);
 		var UserId = this.props.loggedInStatus == 'LOGGED_IN' ? this.props.user[0].id : this.state.UserId;
 		await fetch('api/ComputerComponent/GetUserOptions?UserId=' + UserId)
 			.then(response => response.json())
@@ -738,7 +738,6 @@ export default class Body extends Component<any, any> {
 						</div>
 					</div>
 				</div>
-				<Footer />
 			</div>
 		);
 	}

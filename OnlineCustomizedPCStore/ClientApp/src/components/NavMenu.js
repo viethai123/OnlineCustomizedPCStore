@@ -107,7 +107,7 @@ export class NavMenu extends Component {
 												</NavLink>
 											</NavItem>
 										}</li>
-										<li className="nav__account--register"><a href="/accounts/register/" id="js-trigger--profileMobile">Register</a></li>
+										<li className="nav__account--register"><a href="/login" id="js-trigger--profileMobile">Register</a></li>
 										<li className="nav__account--country">
 											<select className="select select--small language-selector pp-country-select" name="cc">
 												<option value="ar">Argentina</option>

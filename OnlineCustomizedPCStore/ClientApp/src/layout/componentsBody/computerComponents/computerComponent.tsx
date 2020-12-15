@@ -248,20 +248,6 @@ export default class ComputerComponent extends Component<any, any> {
 													<nav>
 														<ul className="css-19x39nn">
 															<li
-																// disabled=""
-																data-track-content="true"
-																data-content-region-name="paging"
-																data-content-name="nextPage"
-																className="css-4utbjj"
-															>
-																<button className="css-9lxisd">
-																	<span
-																		// size="12"
-																		className="css-1szbwkf"
-																	></span>
-																</button>
-															</li>
-															<li
 																data-track-content="true"
 																data-content-region-name="paging"
 																data-content-name="gotoPage"
@@ -296,19 +282,6 @@ export default class ComputerComponent extends Component<any, any> {
 																className="css-15il98n"
 															>
 																<button className="css-1gx9tfy">4</button>
-															</li>
-															<li
-																data-track-content="true"
-																data-content-region-name="paging"
-																data-content-name="nextPage"
-																className="css-1k2r91"
-															>
-																<button className="css-9lxisd">
-																	<span
-																		// size="12"
-																		className="css-94s669"
-																	></span>
-																</button>
 															</li>
 														</ul>
 													</nav>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
+import Footer from '../layout/footer';
 import { NavMenu } from './NavMenu';
 
 export class Layout extends Component {
@@ -18,6 +19,7 @@ export class Layout extends Component {
 				<>
 					{this.props.children}
 				</>
+				<Footer />
 			</div>
 		);
 	}
